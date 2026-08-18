@@ -1,22 +1,22 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { getProduct, downloadUrl, type Product } from "@/lib/decks";
+import { getProduto, downloadUrl, type Produto } from "@/lib/decks";
 import { BottomNav } from "@/components/BottomNav";
 import { PdfViewer } from "@/components/PdfViewer";
 import { Scoreboard } from "@/components/Scoreboard";
 
 export const Route = createFileRoute("/purchases/$productId")({
   loader: ({ params }) => {
-    const product = getProduct(params.productId);
+    const product = getProduto(params.productId);
     if (!product) throw notFound();
     return { product };
   },
   head: ({ loaderData }) => {
     const p = loaderData?.product;
-    const title = p ? `${p.name} — Your Purchases` : "Product — Your Purchases";
+    const title = p ? `${p.name} — Minhas compras` : "Produto — Minhas compras";
     const description = p
-      ? `${p.tagline}. View the PDF online, print at home and follow the step-by-step guide.`
-      : "View, print and download your UNO Method product.";
+      ? `${p.tagline}. Veja o PDF online, imprima em casa e siga o guia passo a passo.`
+      : "Veja, imprima e baixe seu produto do Método UNO.";
     return {
       meta: [
         { title },
@@ -28,12 +28,14 @@ export const Route = createFileRoute("/purchases/$productId")({
       ],
     };
   },
-  component: ProductPage,
+  component: ProdutoPage,
 });
 
-function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: Product };
-  const [viewing, setViewing] = useState<{ url: string; name: string; filename: string } | null>(null);
+function ProdutoPage() {
+  const { product } = Route.useLoaderData() as { product: Produto };
+  const [viewing, setViewing] = useState<{ url: string; name: string; filename: string } | null>(
+    null,
+  );
 
   return (
     <div className="mx-auto min-h-screen w-full px-4 pb-28 pt-4">
@@ -41,7 +43,7 @@ function ProductPage() {
         to="/purchases"
         className="btn-bounce mb-4 inline-block rounded-2xl border-4 border-border bg-card px-4 py-2 font-display text-base font-extrabold"
       >
-        ← Your Purchases
+        ← Minhas compras
       </Link>
 
       <header
@@ -61,37 +63,47 @@ function ProductPage() {
           <h1 className="mt-2 font-display text-2xl font-extrabold leading-tight text-primary-foreground drop-shadow">
             {product.name}
           </h1>
-          <p className="mt-1 font-display text-base font-bold text-primary-foreground/95">{product.operations}</p>
+          <p className="mt-1 font-display text-base font-bold text-primary-foreground/95">
+            {product.operations}
+          </p>
         </div>
       </header>
 
       <section className="mb-5 space-y-3">
-        <h2 className="font-display text-2xl font-extrabold">📥 Your files</h2>
+        <h2 className="font-display text-2xl font-extrabold">📥 Seus arquivos</h2>
         {product.files.map((file) => (
-          <article key={file.filename} className="shadow-pop rounded-3xl border-4 border-border bg-card p-4">
+          <article
+            key={file.filename}
+            className="shadow-pop rounded-3xl border-4 border-border bg-card p-4"
+          >
             <h3 className="font-display text-lg font-extrabold leading-tight">{file.label}</h3>
             <p className="mt-1 text-sm font-bold text-muted-foreground">{file.description}</p>
             <p className="text-sm font-bold text-muted-foreground">{file.pages} pages · PDF</p>
             <div className="mt-3 grid grid-cols-2 gap-3">
               <button
-                onClick={() => setViewing({ url: file.url, name: file.label, filename: file.filename })}
+                onClick={() =>
+                  setViewing({ url: file.url, name: file.label, filename: file.filename })
+                }
                 className="btn-bounce min-h-14 rounded-2xl border-4 border-border bg-fun-blue px-2 py-3 font-display text-lg font-extrabold text-primary-foreground"
               >
-                👀 View
+                👀 Ver
               </button>
               <button
                 onClick={() => downloadUrl(file.url, file.filename)}
                 className="btn-bounce min-h-14 rounded-2xl border-4 border-border bg-fun-green px-2 py-3 font-display text-lg font-extrabold text-primary-foreground"
               >
-                ⬇️ Download
+                ⬇️ Baixar
               </button>
             </div>
           </article>
         ))}
       </section>
 
-      <Steps title="🖨️ How to print" items={product.print} defaultOpen />
-      <Steps title={product.hasScoreboard ? "🎮 How to play" : "✂️ How to cut & play"} items={product.play} />
+      <Steps title="🖨️ Como imprimir" items={product.print} defaultOpen />
+      <Steps
+        title={product.hasScoreboard ? "🎮 Como jogar" : "✂️ Como recortar e jogar"}
+        items={product.play}
+      />
 
       {product.hasScoreboard && (
         <div className="mt-4">
@@ -102,7 +114,12 @@ function ProductPage() {
       <BottomNav />
       {viewing && (
         <PdfViewer
-          product={{ ...(product as Product), name: viewing.name, url: viewing.url, filename: viewing.filename }}
+          product={{
+            ...(product as Produto),
+            name: viewing.name,
+            url: viewing.url,
+            filename: viewing.filename,
+          }}
           onClose={() => setViewing(null)}
         />
       )}
@@ -110,7 +127,15 @@ function ProductPage() {
   );
 }
 
-function Steps({ title, items, defaultOpen }: { title: string; items: string[]; defaultOpen?: boolean }) {
+function Steps({
+  title,
+  items,
+  defaultOpen,
+}: {
+  title: string;
+  items: string[];
+  defaultOpen?: boolean;
+}) {
   const [open, setOpen] = useState(!!defaultOpen);
   return (
     <div className="mt-3 overflow-hidden rounded-3xl border-4 border-border">

@@ -15,13 +15,30 @@ import {
   GameStage,
 } from "./GameShell";
 
-
 type Phase = "intro" | "banner" | "play" | "done";
 
 const ACTS = [
-  { title: "Meadow Range", emoji: "🌼", bg: "from-sky-300 to-emerald-300", drift: 0.25, tip: "Tap the balloon with the right answer!" },
-  { title: "Windy Cliffs", emoji: "🍃", bg: "from-amber-200 to-sky-400", drift: 0.55, tip: "The balloons drift — aim carefully!" },
-  { title: "Star Tower", emoji: "🌙", bg: "from-indigo-500 to-purple-700", drift: 0.85, tip: "Final round! Pop the last balloons!" },
+  {
+    title: "Meadow Range",
+    emoji: "🌼",
+    bg: "from-sky-300 to-emerald-300",
+    drift: 0.25,
+    tip: "Tap the balloon with the right answer!",
+  },
+  {
+    title: "Windy Cliffs",
+    emoji: "🍃",
+    bg: "from-amber-200 to-sky-400",
+    drift: 0.55,
+    tip: "The balloons drift — aim carefully!",
+  },
+  {
+    title: "Estrela Tower",
+    emoji: "🌙",
+    bg: "from-indigo-500 to-purple-700",
+    drift: 0.85,
+    tip: "Final round! Pop the last balloons!",
+  },
 ];
 
 const SHOTS_PER_ACT = 4;
@@ -184,7 +201,9 @@ export function ArcheryMath({ onExit }: { level?: 1 | 2 | 3; onExit: () => void 
     <div className="animate-pop-in">
       <Narrator mascot="🐰" text={stage.tip} />
       <div className="mb-2 flex items-center justify-between">
-        <span className="font-display text-lg font-extrabold">🎯 {correct}/{totalShots}</span>
+        <span className="font-display text-lg font-extrabold">
+          🎯 {correct}/{totalShots}
+        </span>
         {streak >= 2 && (
           <span className="animate-bounce-soft rounded-full bg-fun-orange px-3 py-1 font-display text-sm font-extrabold text-primary-foreground">
             🔥 {streak}
@@ -203,10 +222,13 @@ export function ArcheryMath({ onExit }: { level?: 1 | 2 | 3; onExit: () => void 
         className={`shadow-pop rounded-3xl border-4 border-border bg-gradient-to-b ${stage.bg} ${shakeClass}`}
       >
         <div className="absolute inset-0">
-
           {/* clouds */}
           {["☁️", "☁️", "🌤️"].map((c, i) => (
-            <span key={i} className="absolute animate-bounce-soft text-3xl opacity-80" style={{ left: 20 + i * 110, top: 16 + (i % 2) * 24 }}>
+            <span
+              key={i}
+              className="absolute animate-bounce-soft text-3xl opacity-80"
+              style={{ left: 20 + i * 110, top: 16 + (i % 2) * 24 }}
+            >
               {c}
             </span>
           ))}
@@ -216,7 +238,11 @@ export function ArcheryMath({ onExit }: { level?: 1 | 2 | 3; onExit: () => void 
               key={b.id}
               onPointerDown={() => shoot(b)}
               className={`absolute flex h-14 w-14 items-center justify-center rounded-full border-4 border-border font-display text-2xl font-extrabold text-primary-foreground transition-all duration-300 ${b.color} ${
-                b.popped ? "scale-0 opacity-0" : b.wrong ? "animate-shake opacity-60 grayscale" : "animate-bounce-soft"
+                b.popped
+                  ? "scale-0 opacity-0"
+                  : b.wrong
+                    ? "animate-shake opacity-60 grayscale"
+                    : "animate-bounce-soft"
               }`}
               style={{ left: b.x, top: b.y }}
               aria-label={`Balloon ${b.value}`}
@@ -237,7 +263,12 @@ export function ArcheryMath({ onExit }: { level?: 1 | 2 | 3; onExit: () => void 
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-6xl">🐰</div>
           <div className="absolute bottom-0 left-0 right-0 h-6 bg-emerald-600/70" />
           {phase === "banner" && (
-            <StageBanner act={act + 1} title={stage.title} emoji={stage.emoji} onDone={() => setPhase("play")} />
+            <StageBanner
+              act={act + 1}
+              title={stage.title}
+              emoji={stage.emoji}
+              onDone={() => setPhase("play")}
+            />
           )}
         </div>
       </GameStage>

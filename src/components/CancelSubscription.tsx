@@ -11,7 +11,10 @@ interface FormData {
   reason: string;
 }
 
-const TYPE_META: Record<RequestType, { label: string; emoji: string; desc: string; status: string }> = {
+const TYPE_META: Record<
+  RequestType,
+  { label: string; emoji: string; desc: string; status: string }
+> = {
   cancel: {
     label: "Cancel subscription",
     emoji: "🚪",
@@ -89,7 +92,9 @@ export function CancelSubscription() {
       <section className="shadow-pop mb-8 rounded-3xl border-4 border-border bg-card p-5 animate-pop-in">
         <div className="mb-4 border-b-4 border-dashed border-border pb-3 text-center">
           <p className="font-display text-2xl font-extrabold">✅ Request Confirmed</p>
-          <p className="text-sm font-bold text-muted-foreground">UNO Method · {TYPE_META[type].label}</p>
+          <p className="text-sm font-bold text-muted-foreground">
+            Método UNO · {TYPE_META[type].label}
+          </p>
         </div>
         <dl className="space-y-2 text-base font-bold">
           <Row label="Reference" value={reference} />
@@ -103,9 +108,10 @@ export function CancelSubscription() {
         </dl>
         <p className="mt-4 rounded-2xl bg-muted p-4 text-sm font-bold text-muted-foreground">
           Your request has been confirmed and you will not be billed again. Refunds usually take{" "}
-          <strong className="text-foreground">5–10 business days</strong> to appear on your credit or debit card
-          statement — the exact timing varies from bank to bank. You'll also receive a confirmation email at{" "}
-          <strong className="text-foreground break-all">{form.email}</strong>. Any questions, contact{" "}
+          <strong className="text-foreground">5–10 business days</strong> to appear on your credit
+          or debit card statement — the exact timing varies from bank to bank. You'll also receive a
+          confirmation email at <strong className="text-foreground break-all">{form.email}</strong>.
+          Any questions, contact{" "}
           <a className="text-foreground underline" href="mailto:support@unomethod.com">
             support@unomethod.com
           </a>
@@ -125,7 +131,7 @@ export function CancelSubscription() {
     <section className="mb-8 rounded-3xl border-4 border-border bg-card p-5">
       <h2 className="font-display text-xl font-extrabold">Cancel / Refund</h2>
       <p className="mt-1 text-base font-bold text-muted-foreground">
-        Manage your UNO Method membership — cancel, request a refund or pause your plan.
+        Manage your Método UNO membership — cancel, request a refund or pause your plan.
       </p>
 
       {step === "closed" && (
@@ -153,7 +159,9 @@ export function CancelSubscription() {
                 <span className="font-display text-base font-extrabold">
                   {TYPE_META[t].emoji} {TYPE_META[t].label}
                 </span>
-                <span className="mt-1 block text-sm font-bold text-muted-foreground">{TYPE_META[t].desc}</span>
+                <span className="mt-1 block text-sm font-bold text-muted-foreground">
+                  {TYPE_META[t].desc}
+                </span>
               </button>
             ))}
           </div>
@@ -169,7 +177,7 @@ export function CancelSubscription() {
       {step === "s1" && (
         <OfferStep
           title="Are you sure you want to leave? 😢"
-          text="You will lose every weekly deck drop, the FIFA World Cup 2026 edition updates and all premium games."
+          text="You will lose every weekly deck drop, the FIFA Copa do Mundo 2026 edition updates and all premium games."
           keepLabel="🎉 Keep my subscription"
           keepClass="bg-fun-green text-primary-foreground"
           onKeep={stay}
@@ -193,7 +201,7 @@ export function CancelSubscription() {
       {step === "s3" && (
         <OfferStep
           title="Your kid's progress will be paused ⭐"
-          text="Streaks, badges and the Math Road journey stay locked until you come back."
+          text="Streaks, badges and the Estrada da Matemática journey stay locked until you come back."
           keepLabel="⭐ Keep the progress, stay subscribed"
           keepClass="bg-fun-blue text-primary-foreground"
           onKeep={stay}
@@ -206,10 +214,16 @@ export function CancelSubscription() {
         <div className="mt-4 animate-pop-in">
           <p className="font-display text-lg font-extrabold">Final step</p>
           <p className="mt-1 text-base font-bold text-muted-foreground">
-            Confirm your purchase details so we can locate your order ({TYPE_META[type].label.toLowerCase()}).
+            Confirm your purchase details so we can locate your order (
+            {TYPE_META[type].label.toLowerCase()}).
           </p>
           <div className="mt-3 space-y-3">
-            <Field label="Full name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="Jane Smith" />
+            <Field
+              label="Full name"
+              value={form.name}
+              onChange={(v) => setForm({ ...form, name: v })}
+              placeholder="Jane Smith"
+            />
             <Field
               label="Purchase email"
               type="email"
@@ -310,7 +324,9 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block font-display text-sm font-extrabold text-muted-foreground">{label}</span>
+      <span className="mb-1 block font-display text-sm font-extrabold text-muted-foreground">
+        {label}
+      </span>
       <input
         type={type}
         value={value}

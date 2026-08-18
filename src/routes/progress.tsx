@@ -16,16 +16,19 @@ import { ProfileRedirectFallback } from "@/components/ProfileRedirectFallback";
 export const Route = createFileRoute("/progress")({
   head: () => ({
     meta: [
-      { title: "My Progress — KidsMath Cards" },
-      { name: "description", content: "Track streaks, badges and mastery for each math operation." },
+      { title: "Meu progresso — KidsMath Cards" },
+      {
+        name: "description",
+        content: "Acompanhe sequências, medalhas e domínio de cada operação matemática.",
+      },
     ],
   }),
-  component: Progress,
+  component: Progresso,
 });
 
 const MASTERY_GOAL = 50;
 
-function Progress() {
+function Progresso() {
   const { profile, ready, needsProfile } = useRequireProfile();
   const [stats, setStats] = useState<Stats | null>(null);
   const [streak, setStreak] = useState(0);
@@ -40,13 +43,17 @@ function Progress() {
   if (needsProfile || !profile) return <ProfileRedirectFallback />;
 
   if (!ready || !stats) {
-    return <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">Loading... 🦊</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">
+        Carregando... 🦊
+      </div>
+    );
   }
 
   return (
     <div className="mx-auto min-h-screen w-full px-4 pb-28 pt-6">
       <h1 className="mb-6 text-center font-display text-3xl font-extrabold text-primary">
-        {profile.name}'s Progress ⭐
+        {profile.name}'s Progresso ⭐
       </h1>
 
       {/* Streak */}
@@ -56,7 +63,9 @@ function Progress() {
           {streak} day{streak === 1 ? "" : "s"} streak!
         </p>
         <p className="text-sm font-bold text-primary-foreground/90">
-          {streak === 0 ? "Play today to start your streak!" : "Keep playing every day!"}
+          {streak === 0
+            ? "Jogue hoje para começar sua sequência!"
+            : "Continue jogando todos os dias!"}
         </p>
       </div>
 
@@ -83,7 +92,9 @@ function Progress() {
                     style={{ width: `${pct}%` }}
                   />
                 </div>
-                {pct >= 100 && <p className="mt-1 text-sm font-extrabold text-fun-green">Mastered! 🎉</p>}
+                {pct >= 100 && (
+                  <p className="mt-1 text-sm font-extrabold text-fun-green">Mastered! 🎉</p>
+                )}
               </div>
             );
           })}
@@ -104,7 +115,9 @@ function Progress() {
                 }`}
               >
                 <span className="text-3xl">{badge.emoji}</span>
-                <p className="mt-1 font-display text-xs font-extrabold leading-tight">{badge.name}</p>
+                <p className="mt-1 font-display text-xs font-extrabold leading-tight">
+                  {badge.name}
+                </p>
               </div>
             );
           })}

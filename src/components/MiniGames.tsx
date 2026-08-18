@@ -139,7 +139,8 @@ function MCQFrame({
     if (picked !== null) return;
     setPicked(c);
     const ok = c === answer;
-    ok ? playDing() : playBuzz();
+    if (ok) playDing();
+    else playBuzz();
     setTimeout(() => {
       setPicked(null);
       onAnswer(ok);
@@ -147,7 +148,9 @@ function MCQFrame({
   };
   return (
     <div className="animate-pop-in">
-      <p className="mb-2 text-center font-display text-sm font-bold text-muted-foreground">{title}</p>
+      <p className="mb-2 text-center font-display text-sm font-bold text-muted-foreground">
+        {title}
+      </p>
       <div className="shadow-pop mb-4 min-h-[180px] rounded-3xl border-4 border-border bg-card p-4">
         {visuals}
         <p className="mt-3 text-center font-display text-3xl font-extrabold">{prompt} = ?</p>
@@ -214,7 +217,8 @@ export function CompareGame({ phase, level, onComplete }: MiniGameProps) {
     if (picked) return;
     setPicked(op);
     const ok = op === truth;
-    ok ? playDing() : playBuzz();
+    if (ok) playDing();
+    else playBuzz();
     setTimeout(() => {
       const nextCorrect = correct + (ok ? 1 : 0);
       if (i + 1 >= phase.rounds) onComplete(nextCorrect, phase.rounds);
@@ -355,7 +359,8 @@ export function TimedGame({ phase, level, onComplete }: MiniGameProps) {
   const pick = (c: number) => {
     if (timeLeft <= 0) return;
     const ok = c === q.answer;
-    ok ? playDing() : playBuzz();
+    if (ok) playDing();
+    else playBuzz();
     setFlash(ok ? "ok" : "no");
     setTotal((t) => t + 1);
     if (ok) {
@@ -383,7 +388,11 @@ export function TimedGame({ phase, level, onComplete }: MiniGameProps) {
       </div>
       <div
         className={`shadow-pop mb-4 rounded-3xl border-4 p-6 text-center transition-colors ${
-          flash === "ok" ? "border-fun-green bg-fun-green/20" : flash === "no" ? "border-fun-red bg-fun-red/20" : "border-border bg-card"
+          flash === "ok"
+            ? "border-fun-green bg-fun-green/20"
+            : flash === "no"
+              ? "border-fun-red bg-fun-red/20"
+              : "border-border bg-card"
         }`}
       >
         <p className="font-display text-5xl font-extrabold">{q.prompt} = ?</p>
@@ -404,7 +413,9 @@ export function TimedGame({ phase, level, onComplete }: MiniGameProps) {
 }
 
 function randomQuestion(phase: Phase, level: 1 | 2 | 3): Question {
-  const ops: Operation[] = phase.op ? [phase.op] : ["addition", "subtraction", "multiplication", "division"];
+  const ops: Operation[] = phase.op
+    ? [phase.op]
+    : ["addition", "subtraction", "multiplication", "division"];
   const op = ops[Math.floor(Math.random() * ops.length)];
   return generateQuestion(op, level);
 }
@@ -430,7 +441,8 @@ export function CatchGame({ phase, level, onComplete }: MiniGameProps) {
 
   const handle = (pickVal: number) => {
     const ok = pickVal === q.answer;
-    ok ? playDing() : playBuzz();
+    if (ok) playDing();
+    else playBuzz();
     setFlash(ok ? "ok" : "no");
     setTimeout(() => {
       setFlash(null);
@@ -494,7 +506,7 @@ interface MemCard {
 
 export function MemoryGame({ phase, level, onComplete }: MiniGameProps) {
   const pairs = 4;
-  const [cards, setCards] = useState<MemCard[]>(() => buildMemoryCards(pairs, level));
+  const [cartas, setCards] = useState<MemCard[]>(() => buildMemoryCards(pairs, level));
   const [flipped, setFlipped] = useState<string[]>([]);
   const [matched, setMatched] = useState<string[]>([]);
   const [attempts, setAttempts] = useState(0);
@@ -516,7 +528,7 @@ export function MemoryGame({ phase, level, onComplete }: MiniGameProps) {
     setFlipped(next);
     if (next.length === 2) {
       setAttempts((a) => a + 1);
-      const [a, b] = next.map((x) => cards.find((c) => c.id === x)!);
+      const [a, b] = next.map((x) => cartas.find((c) => c.id === x)!);
       if (a.pair === b.pair && a.kind !== b.kind) {
         playDing();
         setTimeout(() => {
@@ -536,7 +548,7 @@ export function MemoryGame({ phase, level, onComplete }: MiniGameProps) {
         Tries: {attempts} · Matched: {matched.length / 2}/{pairs}
       </p>
       <div className="grid grid-cols-4 gap-2">
-        {cards.map((c) => {
+        {cartas.map((c) => {
           const revealed = flipped.includes(c.id) || matched.includes(c.id);
           return (
             <button

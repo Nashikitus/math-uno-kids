@@ -1,7 +1,7 @@
 {
-  "name": "KidsMath Cards",
-  "short_name": "KidsMath",
-  "description": "Print & play math card decks, digital practice games and progress tracking for kids.",
+  "name": "UNO Matemático Kids",
+  "short_name": "UNO Matemático",
+  "description": "Baralhos de matemática para imprimir, minijogos e acompanhamento do progresso das crianças.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFF8E7",

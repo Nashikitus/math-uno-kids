@@ -2,11 +2,14 @@ export type Operation = "addition" | "subtraction" | "multiplication" | "divisio
 
 export const OPERATIONS: Operation[] = ["addition", "subtraction", "multiplication", "division"];
 
-export const OP_META: Record<Operation, { label: string; symbol: string; color: string; emoji: string }> = {
-  addition: { label: "Addition", symbol: "+", color: "fun-green", emoji: "➕" },
-  subtraction: { label: "Subtraction", symbol: "−", color: "fun-blue", emoji: "➖" },
-  multiplication: { label: "Multiplication", symbol: "×", color: "fun-orange", emoji: "✖️" },
-  division: { label: "Division", symbol: "÷", color: "fun-purple", emoji: "➗" },
+export const OP_META: Record<
+  Operation,
+  { label: string; symbol: string; color: string; emoji: string }
+> = {
+  addition: { label: "Adição", symbol: "+", color: "fun-green", emoji: "➕" },
+  subtraction: { label: "Subtração", symbol: "−", color: "fun-blue", emoji: "➖" },
+  multiplication: { label: "Multiplicação", symbol: "×", color: "fun-orange", emoji: "✖️" },
+  division: { label: "Divisão", symbol: "÷", color: "fun-purple", emoji: "➗" },
 };
 
 export type Gender = "boy" | "girl";
@@ -160,14 +163,44 @@ export interface BadgeDef {
 }
 
 export const BADGE_DEFS: BadgeDef[] = [
-  { id: "first-steps", name: "First Steps", emoji: "🌟", description: "Answer your first question" },
+  {
+    id: "first-steps",
+    name: "First Steps",
+    emoji: "🌟",
+    description: "Answer your first question",
+  },
   { id: "adder-ace", name: "Adder Ace", emoji: "➕", description: "20 correct additions" },
   { id: "minus-master", name: "Minus Master", emoji: "➖", description: "20 correct subtractions" },
-  { id: "times-titan", name: "Times Titan", emoji: "✖️", description: "20 correct multiplications" },
-  { id: "division-dynamo", name: "Division Dynamo", emoji: "➗", description: "20 correct divisions" },
-  { id: "perfect-round", name: "Perfect Round", emoji: "💯", description: "Score 10/10 in a round" },
-  { id: "hot-streak", name: "Hot Streak", emoji: "🔥", description: "Play 3 days in a row" },
-  { id: "super-streak", name: "Super Streak", emoji: "🚀", description: "Play 5 days in a row" },
+  {
+    id: "times-titan",
+    name: "Times Titan",
+    emoji: "✖️",
+    description: "20 correct multiplications",
+  },
+  {
+    id: "division-dynamo",
+    name: "Divisão Dynamo",
+    emoji: "➗",
+    description: "20 correct divisions",
+  },
+  {
+    id: "perfect-round",
+    name: "Perfect Round",
+    emoji: "💯",
+    description: "Score 10/10 in a round",
+  },
+  {
+    id: "hot-streak",
+    name: "Sequência quente",
+    emoji: "🔥",
+    description: "Jogue por 3 dias seguidos",
+  },
+  {
+    id: "super-streak",
+    name: "Super sequência",
+    emoji: "🚀",
+    description: "Jogue por 5 dias seguidos",
+  },
   { id: "storyteller", name: "Storyteller", emoji: "📚", description: "Solve a story problem" },
   { id: "explorer", name: "Explorer", emoji: "🗺️", description: "Beat your first roadmap phase" },
   { id: "boss-slayer", name: "Boss Slayer", emoji: "👑", description: "Defeat the final boss" },

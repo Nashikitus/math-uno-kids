@@ -5,16 +5,16 @@ import { BottomNav } from "@/components/BottomNav";
 export const Route = createFileRoute("/purchases/")({
   head: () => ({
     meta: [
-      { title: "Your Purchases — UNO Method" },
+      { title: "Minhas compras — Método UNO" },
       {
         name: "description",
         content:
-          "All your UNO Method products in one place: Math UNO decks, the World Cup 2026 edition and the Paper Dolls Craft Kit. Open a card to view, print and download.",
+          "Todos os produtos do Método UNO em um só lugar: baralhos UNO Matemático, edição Copa do Mundo 2026 e Kit de bonecas de papel. Abra um produto para ver, imprimir e baixar.",
       },
-      { property: "og:title", content: "Your Purchases — UNO Method" },
+      { property: "og:title", content: "Minhas compras — Método UNO" },
       {
         property: "og:description",
-        content: "Open each product card to view the PDF, print instructions and downloads.",
+        content: "Abra cada produto para ver o PDF, as instruções de impressão e os downloads.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,13 +28,13 @@ function Purchases() {
     <div className="mx-auto min-h-screen w-full px-4 pb-28 pt-6">
       <header className="shadow-pop mb-6 rounded-3xl border-4 border-border bg-gradient-to-br from-fun-purple via-fun-blue to-fun-green p-5 text-center animate-pop-in">
         <p className="font-display text-sm font-extrabold uppercase tracking-widest text-primary-foreground/90">
-          UNO Method
+          Método UNO
         </p>
         <h1 className="mt-1 font-display text-3xl font-extrabold text-primary-foreground drop-shadow-md sm:text-4xl">
-          Your Purchases 🎁
+          Minhas compras 🎁
         </h1>
         <p className="mt-2 font-display text-base font-bold text-primary-foreground/95">
-          Tap a product to open your PDFs, print guide and rules.
+          Toque em um produto para abrir seus PDFs, guia de impressão e regras.
         </p>
       </header>
 
@@ -63,9 +63,13 @@ function Purchases() {
               </span>
             </div>
             <div className="p-3">
-              <h2 className="font-display text-base font-extrabold leading-tight">{product.shortName}</h2>
-              <p className="mt-1 text-xs font-bold leading-snug text-muted-foreground">{product.tagline}</p>
-              <p className="mt-2 font-display text-sm font-extrabold text-primary">Open ▶</p>
+              <h2 className="font-display text-base font-extrabold leading-tight">
+                {product.shortName}
+              </h2>
+              <p className="mt-1 text-xs font-bold leading-snug text-muted-foreground">
+                {product.tagline}
+              </p>
+              <p className="mt-2 font-display text-sm font-extrabold text-primary">Abrir ▶</p>
             </div>
           </Link>
         ))}

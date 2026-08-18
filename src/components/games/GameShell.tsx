@@ -10,15 +10,30 @@ import confetti from "canvas-confetti";
 export function easyQuestion(op: Operation): Question {
   // Force level 1 style but with even smaller ranges for premium feel
   const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-  let a = 0, b = 0, answer = 0, symbol = "+";
+  let a = 0,
+    b = 0,
+    answer = 0,
+    symbol = "+";
   if (op === "addition") {
-    a = rand(1, 9); b = rand(1, 9); answer = a + b; symbol = "+";
+    a = rand(1, 9);
+    b = rand(1, 9);
+    answer = a + b;
+    symbol = "+";
   } else if (op === "subtraction") {
-    a = rand(2, 10); b = rand(1, a); answer = a - b; symbol = "−";
+    a = rand(2, 10);
+    b = rand(1, a);
+    answer = a - b;
+    symbol = "−";
   } else if (op === "multiplication") {
-    a = rand(2, 5); b = rand(2, 5); answer = a * b; symbol = "×";
+    a = rand(2, 5);
+    b = rand(2, 5);
+    answer = a * b;
+    symbol = "×";
   } else {
-    b = rand(2, 5); answer = rand(1, 5); a = b * answer; symbol = "÷";
+    b = rand(2, 5);
+    answer = rand(1, 5);
+    a = b * answer;
+    symbol = "÷";
   }
   // Small tight choices (±1..±3)
   const set = new Set<number>([answer]);
@@ -43,7 +58,13 @@ export { generateQuestion };
 
 // -------------------- OpPicker --------------------
 
-export function OpPicker({ value, onChange }: { value: Operation; onChange: (o: Operation) => void }) {
+export function OpPicker({
+  value,
+  onChange,
+}: {
+  value: Operation;
+  onChange: (o: Operation) => void;
+}) {
   return (
     <div className="mb-3 grid grid-cols-4 gap-2">
       {OPERATIONS.map((op) => (
@@ -99,7 +120,9 @@ export function StoryIntro({
   bg: string; // tailwind gradient
 }) {
   return (
-    <div className={`animate-pop-in shadow-pop relative overflow-hidden rounded-3xl border-4 border-border ${bg} p-5 text-center`}>
+    <div
+      className={`animate-pop-in shadow-pop relative overflow-hidden rounded-3xl border-4 border-border ${bg} p-5 text-center`}
+    >
       {/* floating decorative emojis */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {["✨", "⭐", "💫", "🌟", "✨", "⭐"].map((e, i) => (
@@ -119,12 +142,12 @@ export function StoryIntro({
       </div>
       <div className="relative">
         <div className="animate-bounce-soft text-8xl">{mascot}</div>
-        <h2 className="mt-2 font-display text-3xl font-extrabold text-white drop-shadow-lg">{title}</h2>
+        <h2 className="mt-2 font-display text-3xl font-extrabold text-white drop-shadow-lg">
+          {title}
+        </h2>
         <p className="font-display text-lg font-bold text-white/90 drop-shadow">{subtitle}</p>
         <div className="mx-auto mt-4 max-w-xs rounded-2xl border-4 border-border bg-card/95 p-3">
-          <p className="font-display text-sm font-bold leading-relaxed text-foreground">
-            {story}
-          </p>
+          <p className="font-display text-sm font-bold leading-relaxed text-foreground">{story}</p>
         </div>
         <button
           onClick={onStart}
@@ -139,7 +162,17 @@ export function StoryIntro({
 
 // -------------------- Stage Banner --------------------
 
-export function StageBanner({ act, title, emoji, onDone }: { act: number; title: string; emoji: string; onDone: () => void }) {
+export function StageBanner({
+  act,
+  title,
+  emoji,
+  onDone,
+}: {
+  act: number;
+  title: string;
+  emoji: string;
+  onDone: () => void;
+}) {
   useEffect(() => {
     const t = setTimeout(onDone, 1500);
     return () => clearTimeout(t);
@@ -147,7 +180,9 @@ export function StageBanner({ act, title, emoji, onDone }: { act: number; title:
   return (
     <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <div className="animate-pop-in shadow-pop rounded-3xl border-4 border-border bg-gradient-to-br from-fun-yellow via-fun-orange to-fun-pink px-8 py-6 text-center">
-        <p className="font-display text-sm font-extrabold uppercase tracking-widest text-white/90">Act {act}</p>
+        <p className="font-display text-sm font-extrabold uppercase tracking-widest text-white/90">
+          Act {act}
+        </p>
         <div className="my-1 text-5xl animate-bounce-soft">{emoji}</div>
         <h3 className="font-display text-2xl font-extrabold text-white drop-shadow">{title}</h3>
       </div>
@@ -166,9 +201,17 @@ export function Narrator({ mascot, text }: { mascot: string; text: string }) {
   );
 }
 
-// -------------------- Progress Bar --------------------
+// -------------------- Progresso Bar --------------------
 
-export function ArcProgress({ value, max, color = "bg-fun-green" }: { value: number; max: number; color?: string }) {
+export function ArcProgress({
+  value,
+  max,
+  color = "bg-fun-green",
+}: {
+  value: number;
+  max: number;
+  color?: string;
+}) {
   const pct = Math.min(100, (value / max) * 100);
   return (
     <div className="h-3 w-full overflow-hidden rounded-full border-2 border-border bg-card">
@@ -241,7 +284,13 @@ export function GameResult({
     <div className="animate-pop-in text-center">
       <span className="inline-block animate-bounce-soft text-8xl">{stars > 0 ? mascot : "😅"}</span>
       <h2 className="mt-3 font-display text-3xl font-extrabold">
-        {stars === 3 ? "LEGENDARY!" : stars === 2 ? "Amazing!" : stars === 1 ? "Good try!" : "Try again!"}
+        {stars === 3
+          ? "LEGENDARY!"
+          : stars === 2
+            ? "Amazing!"
+            : stars === 1
+              ? "Good try!"
+              : "Tentar novamente!"}
       </h2>
       <div className="mt-3 flex justify-center gap-2">
         {[1, 2, 3].map((s) => (
@@ -267,13 +316,13 @@ export function GameResult({
           onClick={onReplay}
           className="btn-bounce shadow-pop w-full rounded-3xl bg-primary px-6 py-4 font-display text-lg font-extrabold text-primary-foreground"
         >
-          Play Again 🔁
+          Jogar novamente 🔁
         </button>
         <button
           onClick={onExit}
           className="btn-bounce shadow-pop w-full rounded-3xl border-4 border-border bg-card px-6 py-4 font-display text-lg font-extrabold"
         >
-          🎮 Games Menu
+          🎮 Jogos Menu
         </button>
       </div>
     </div>

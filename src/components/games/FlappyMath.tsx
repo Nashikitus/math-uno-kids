@@ -3,7 +3,18 @@ import type { Question } from "@/lib/questions";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { playDing, playBuzz, playWin } from "@/lib/sounds";
 import { recordAnswer, type Operation } from "@/lib/store";
-import { GameResult, OpPicker, StoryIntro, StageBanner, Narrator, ArcProgress, useShake, celebrate, easyQuestion, GameStage } from "./GameShell";
+import {
+  GameResult,
+  OpPicker,
+  StoryIntro,
+  StageBanner,
+  Narrator,
+  ArcProgress,
+  useShake,
+  celebrate,
+  easyQuestion,
+  GameStage,
+} from "./GameShell";
 
 interface Gate {
   id: number;
@@ -33,9 +44,24 @@ const SPEED = 2.2;
 const PER_ACT = 4;
 
 const ACTS = [
-  { title: "Cloud Kingdom", emoji: "☁️", bg: "linear-gradient(to bottom, #87ceeb, #b4e6ff, #d1f0d1)", clouds: "☁️" },
-  { title: "Sunset Peaks", emoji: "🌅", bg: "linear-gradient(to bottom, #ff9a76, #ffc99b, #ffe0b3)", clouds: "🎈" },
-  { title: "Star Galaxy", emoji: "🌌", bg: "linear-gradient(to bottom, #1a1a4f, #4b3f8a, #a06cd5)", clouds: "⭐" },
+  {
+    title: "Cloud Kingdom",
+    emoji: "☁️",
+    bg: "linear-gradient(to bottom, #87ceeb, #b4e6ff, #d1f0d1)",
+    clouds: "☁️",
+  },
+  {
+    title: "Sunset Peaks",
+    emoji: "🌅",
+    bg: "linear-gradient(to bottom, #ff9a76, #ffc99b, #ffe0b3)",
+    clouds: "🎈",
+  },
+  {
+    title: "Estrela Galaxy",
+    emoji: "🌌",
+    bg: "linear-gradient(to bottom, #1a1a4f, #4b3f8a, #a06cd5)",
+    clouds: "⭐",
+  },
 ];
 
 type Phase = "intro" | "banner" | "playing" | "result";
@@ -64,8 +90,12 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
   const actScoreRef = useRef(0);
   const runningRef = useRef(false);
 
-  useEffect(() => { actRef.current = act; }, [act]);
-  useEffect(() => { actScoreRef.current = actScore; }, [actScore]);
+  useEffect(() => {
+    actRef.current = act;
+  }, [act]);
+  useEffect(() => {
+    actScoreRef.current = actScore;
+  }, [actScore]);
 
   const resetPhysics = () => {
     yRef.current = H / 2;
@@ -155,7 +185,10 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
           setTimeout(() => setFlash(null), 250);
 
           // end of act check
-          if (actScoreRef.current + (ok ? 1 : 0) >= PER_ACT || (!ok && actScoreRef.current + 1 >= PER_ACT)) {
+          if (
+            actScoreRef.current + (ok ? 1 : 0) >= PER_ACT ||
+            (!ok && actScoreRef.current + 1 >= PER_ACT)
+          ) {
             // trigger act transition after brief pause
             runningRef.current = false;
             setTimeout(() => {
@@ -173,8 +206,14 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
       gatesRef.current = gatesRef.current.filter((g) => g.x > -GATE_W - 20);
 
       // bounds - keep bird alive, just bounce
-      if (yRef.current < 0) { yRef.current = 0; vyRef.current = 2; }
-      if (yRef.current > H - 30) { yRef.current = H - 30; vyRef.current = -2; }
+      if (yRef.current < 0) {
+        yRef.current = 0;
+        vyRef.current = 2;
+      }
+      if (yRef.current > H - 30) {
+        yRef.current = H - 30;
+        vyRef.current = -2;
+      }
 
       force((n) => n + 1);
       if (runningRef.current) rafRef.current = requestAnimationFrame(loop);
@@ -193,14 +232,20 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); flap(); }
+      if (e.code === "Space" || e.code === "ArrowUp") {
+        e.preventDefault();
+        flap();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
-  const restart = () => { setOp(op); setPhase("intro"); };
+  const restart = () => {
+    setOp(op);
+    setPhase("intro");
+  };
 
   if (phase === "intro") {
     return (
@@ -210,7 +255,7 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
           mascot="🐤"
           title="Sky Quest"
           subtitle="A journey across 3 magical skies"
-          story="Chico the chick lost his golden crown in the clouds! Fly through the right answers to collect stars and get it back. Ready to soar?"
+          story="Chico the chick lost his golden crown in the clouds! Voe até a resposta certas to collect stars and get it back. Ready to soar?"
           cta="🚀 Start Adventure"
           onStart={startAll}
           bg="bg-gradient-to-br from-sky-400 via-cyan-300 to-emerald-300"
@@ -219,8 +264,21 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
     );
   }
   if (phase === "result") {
-    const endings = ["Chico found his crown! You're a Sky Champion!", "Well flown! Chico is proud of you!", "The stars will always remember your flight!"];
-    return <GameResult mascot="👑" storyEnd={endings[Math.floor(Math.random() * endings.length)]} correct={correct} total={total} onReplay={restart} onExit={onExit} />;
+    const endings = [
+      "Chico found his crown! You're a Sky Champion!",
+      "Well flown! Chico is proud of you!",
+      "The stars will always remember your flight!",
+    ];
+    return (
+      <GameResult
+        mascot="👑"
+        storyEnd={endings[Math.floor(Math.random() * endings.length)]}
+        correct={correct}
+        total={total}
+        onReplay={restart}
+        onExit={onExit}
+      />
+    );
   }
 
   const actInfo = ACTS[act];
@@ -234,7 +292,10 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
           Act {act + 1}/3 · {actInfo.title}
         </span>
         <span className="font-display text-lg font-extrabold">
-          ⭐ {actScore}/{PER_ACT} {streak >= 2 && <span className="ml-1 rounded bg-fun-yellow px-1 text-xs">🔥{streak}</span>}
+          ⭐ {actScore}/{PER_ACT}{" "}
+          {streak >= 2 && (
+            <span className="ml-1 rounded bg-fun-yellow px-1 text-xs">🔥{streak}</span>
+          )}
         </span>
       </div>
       <div className="mb-2">
@@ -248,14 +309,13 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
         style={{ background: actInfo.bg }}
       >
         <div className="absolute inset-0">
-
           {/* parallax decorations */}
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
               className="absolute text-3xl opacity-70"
               style={{
-                left: `${(i * 90 - (performance.now() / 40) % 400)}px`,
+                left: `${i * 90 - ((performance.now() / 40) % 400)}px`,
                 top: 20 + i * 30,
               }}
             >
@@ -273,7 +333,12 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
               </div>
               <div
                 className="absolute flex items-start justify-center rounded-t-2xl border-4 border-border bg-fun-orange font-display text-2xl font-extrabold text-primary-foreground"
-                style={{ left: g.x, top: H / 2 + GATE_GAP / 2, width: GATE_W, height: H / 2 - GATE_GAP / 2 }}
+                style={{
+                  left: g.x,
+                  top: H / 2 + GATE_GAP / 2,
+                  width: GATE_W,
+                  height: H / 2 - GATE_GAP / 2,
+                }}
               >
                 <span className="mt-1">{g.botAnswer}</span>
               </div>
@@ -303,14 +368,24 @@ export function FlappyMath({ level: _level, onExit }: { level: 1 | 2 | 3; onExit
               left: BIRD_X,
               top: yRef.current,
               transform: `rotate(${Math.max(-30, Math.min(60, vyRef.current * 6))}deg)`,
-              filter: flash === "ok" ? "drop-shadow(0 0 12px #22c55e)" : flash === "no" ? "drop-shadow(0 0 12px #ef4444)" : "drop-shadow(0 0 4px #000)",
+              filter:
+                flash === "ok"
+                  ? "drop-shadow(0 0 12px #22c55e)"
+                  : flash === "no"
+                    ? "drop-shadow(0 0 12px #ef4444)"
+                    : "drop-shadow(0 0 4px #000)",
             }}
           >
             🐤
           </div>
         </div>
         {phase === "banner" && (
-          <StageBanner act={act + 1} title={actInfo.title} emoji={actInfo.emoji} onDone={startPlaying} />
+          <StageBanner
+            act={act + 1}
+            title={actInfo.title}
+            emoji={actInfo.emoji}
+            onDone={startPlaying}
+          />
         )}
       </GameStage>
 

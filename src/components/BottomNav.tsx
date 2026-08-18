@@ -1,11 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
 const TABS = [
-  { to: "/", emoji: "🏠", label: "Home" },
-  { to: "/play", emoji: "🎮", label: "Play" },
-  { to: "/purchases", emoji: "🎁", label: "Your\nPurchases" },
-  { to: "/progress", emoji: "⭐", label: "Progress" },
-  { to: "/parents", emoji: "📊", label: "Parents &\nTeachers" },
+  { to: "/", emoji: "🏠", label: "Início" },
+  { to: "/play", emoji: "🎮", label: "Jogar" },
+  { to: "/purchases", emoji: "🎁", label: "Minhas\ncompras" },
+  { to: "/progress", emoji: "⭐", label: "Progresso" },
+  { to: "/parents", emoji: "📊", label: "Responsáveis" },
 ] as const;
 
 export function BottomNav() {

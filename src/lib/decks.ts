@@ -5,15 +5,13 @@ import dollsRumi from "@/assets/paper-dolls-rumi.pdf.asset.json";
 import dollsExtra from "@/assets/paper-dolls-extra-set.pdf.asset.json";
 import dollsDark from "@/assets/paper-dolls-dark-skin-brown-hair.pdf.asset.json";
 import dollsPhone from "@/assets/paper-dolls-iphone-craft.pdf.asset.json";
-import deckSample from "@/assets/deck-sample.jpg.asset.json";
-import fifaSample from "@/assets/fifa-sample.jpg.asset.json";
 import cardMathUno from "@/assets/card-math-uno.jpg";
 import cardFifa from "@/assets/card-fifa.jpg";
-import cardPaperDolls from "@/assets/card-paper-dolls.jpg";
+import cardPaperBonecas from "@/assets/card-paper-dolls.jpg";
 
-export type ProductId = "complete" | "fifa" | "paper-dolls";
+export type ProdutoId = "complete" | "fifa" | "paper-dolls";
 
-export interface ProductFile {
+export interface ProdutoFile {
   label: string;
   description: string;
   pages: number;
@@ -21,185 +19,188 @@ export interface ProductFile {
   filename: string;
 }
 
-export interface Product {
-  id: ProductId;
+export interface Produto {
+  id: ProdutoId;
   name: string;
   shortName: string;
   tagline: string;
   badge: string;
   accent: string; // tailwind bg-* token
   gradient: string;
-  cards: number;
+  cartas: number;
   operations: string;
-  /** Main PDF (used by View / Download buttons) */
+  /** Main PDF (used by Ver / Baixar buttons) */
   url: string;
   filename: string;
   card: string;
   cover: string;
   sample: string;
-  files: ProductFile[];
+  files: ProdutoFile[];
   print: string[];
   play: string[];
   hasScoreboard: boolean;
 }
 
-export const PRODUCTS: Product[] = [
+export const PRODUCTS: Produto[] = [
   {
     id: "complete",
-    name: "Math UNO — Complete Deck",
-    shortName: "Math UNO",
-    tagline: "192 cards · All 4 operations in one deck",
-    badge: "🃏 Core Deck",
+    name: "UNO Matemático — Baralho completo",
+    shortName: "UNO Matemático",
+    tagline: "192 cartas · As quatro operações em um só baralho",
+    badge: "Baralho principal",
     accent: "bg-fun-green",
     gradient: "from-fun-red via-fun-yellow to-fun-green",
-    cards: 192,
-    operations: "Addition · Subtraction · Multiplication · Division",
+    cartas: 192,
+    operations: "Adição · Subtração · Multiplicação · Divisão",
     url: completeAsset.url,
     filename: "math-uno-complete-deck.pdf",
     card: cardMathUno,
     cover: cardMathUno,
-    sample: deckSample.url,
+    sample: cardMathUno,
     files: [
       {
-        label: "Complete Deck — 192 cards",
-        description: "All four operations, card backs and the storage box template.",
+        label: "Baralho completo — 192 cartas",
+        description:
+          "As quatro operações, versos das cartas e modelo de caixa para guardar o baralho.",
         pages: 96,
         url: completeAsset.url,
         filename: "math-uno-complete-deck.pdf",
       },
     ],
     print: [
-      "White cardstock 200–250 gsm for durable cards.",
-      "A4 or US Letter at 100% scale — turn OFF “Fit to page”.",
-      "Print in color, single-sided works great.",
-      "Cut along the dashed lines with a grown-up.",
-      "Fold the included box template to store the deck.",
+      "Cartolina branca de 200–250 g/m² para cartas resistentes.",
+      "A4 ou Carta em escala de 100% — desative “Ajustar à página”.",
+      "Imprima colorido; frente única funciona muito bem.",
+      "Recorte ao longo das linhas tracejadas com um adulto.",
+      "Dobre o modelo de caixa incluído para guardar o baralho.",
     ],
     play: [
-      "2–6 players, ages 4+. Shuffle and deal 7 cards each.",
-      "Flip one card to start the discard pile.",
-      "On your turn: match the COLOR or match the MATH VALUE.",
+      "2–6 jogadores, a partir de 4 anos. Embaralhe e distribua 7 cartas para cada jogador.",
+      "Vire uma carta para começar a pilha de descarte.",
+      "Na sua vez: combine a COR ou o VALOR MATEMÁTICO.",
       "Example: “1+1” can be played on “2” or on “0+2”.",
-      "No match? Draw one card and pass.",
-      "One card left? Shout “UNO!”",
-      "First player to empty their hand wins the round.",
+      "Não tem uma carta? Compre uma e passe a vez.",
+      "Ficou com uma carta? Grite “UNO!”",
+      "O primeiro jogador a ficar sem cartas vence a rodada.",
     ],
     hasScoreboard: true,
   },
   {
     id: "fifa",
-    name: "Math UNO — FIFA World Cup 2026",
-    shortName: "World Cup 2026",
-    tagline: "96 cards · Premium exclusive edition",
-    badge: "⭐ Premium Edition",
+    name: "UNO Matemático — FIFA Copa do Mundo 2026",
+    shortName: "Copa do Mundo 2026",
+    tagline: "96 cartas · Edição premium exclusiva",
+    badge: "⭐ Edição premium",
     accent: "bg-fun-blue",
     gradient: "from-fun-blue via-fun-purple to-fun-red",
-    cards: 96,
-    operations: "Addition + Subtraction · World Cup 2026 theme",
+    cartas: 96,
+    operations: "Adição + Subtração · Tema Copa do Mundo 2026",
     url: fifaAsset.url,
     filename: "math-uno-fifa-world-cup-2026.pdf",
     card: cardFifa,
     cover: cardFifa,
-    sample: fifaSample.url,
+    sample: cardFifa,
     files: [
       {
-        label: "World Cup 2026 Deck — 96 cards",
-        description: "Addition + subtraction cards, team wilds and the themed box template.",
+        label: "Copa do Mundo 2026 Deck — 96 cartas",
+        description:
+          "Cartas de adição e subtração, cartas coringa de times e modelo de caixa temático.",
         pages: 48,
         url: fifaAsset.url,
         filename: "math-uno-fifa-world-cup-2026.pdf",
       },
     ],
     print: [
-      "White cardstock 250 gsm gives the premium feel.",
+      "Cartolina branca de 250 g/m² dá um acabamento premium.",
       "A4 or US Letter at 100% scale — no scaling, no fit-to-page.",
-      "Print in high quality / photo mode for the team colors.",
-      "Cut along the dashed lines, round the corners if you like.",
-      "Fold the World Cup box template to store the deck.",
+      "Imprima em alta qualidade ou modo foto para destacar as cores dos times.",
+      "Recorte ao longo das linhas tracejadas; arredonde os cantos se quiser.",
+      "Dobre o modelo de caixa da Copa do Mundo para guardar o baralho.",
     ],
     play: [
-      "2–6 players, ages 4+. Deal 7 cards to each player.",
-      "Addition + Subtraction only — perfect for younger kids.",
-      "Match the COLOR or match the MATH VALUE of the top card.",
-      "Team cards act as wilds: call out the next color.",
-      "No match? Draw one card and pass.",
-      "One card left? Shout “UNO!” — forget and draw 2.",
-      "Round winner scores the points left in every other hand.",
+      "2–6 jogadores, a partir de 4 anos. Distribua 7 cartas para cada jogador.",
+      "Adição + Subtração only — perfect for younger kids.",
+      "Combine a COR ou o VALOR MATEMÁTICO da carta do topo.",
+      "As cartas de time funcionam como coringas: escolha a próxima cor.",
+      "Não tem uma carta? Compre uma e passe a vez.",
+      "Ficou com uma carta? Grite “UNO!” — se esquecer, compre 2.",
+      "O vencedor da rodada marca os pontos restantes nas mãos dos outros jogadores.",
     ],
     hasScoreboard: true,
   },
   {
     id: "paper-dolls",
-    name: "Paper Dolls Craft Kit",
-    shortName: "Paper Dolls",
-    tagline: "+250 paper dolls to print, cut & play",
-    badge: "🎀 New Release",
+    name: "Kit de bonecas de papel",
+    shortName: "Bonecas de papel",
+    tagline: "+250 bonecas de papel para imprimir, recortar e brincar",
+    badge: "🎀 Novidade",
     accent: "bg-fun-pink",
     gradient: "from-fun-pink via-fun-purple to-fun-red",
-    cards: 250,
-    operations: "Dolls · Outfits · Accessories · Dollhouse",
+    cartas: 250,
+    operations: "Bonecas · Roupas · Acessórios · Casa de bonecas",
     url: dollsBundle.url,
     filename: "paper-dolls-complete-bundle.pdf",
-    card: cardPaperDolls,
-    cover: cardPaperDolls,
-    sample: cardPaperDolls,
+    card: cardPaperBonecas,
+    cover: cardPaperBonecas,
+    sample: cardPaperBonecas,
     files: [
       {
-        label: "Complete Bundle — 20 sheets",
-        description: "Dolls with hair, dresses, shoes and accessories in every color theme.",
+        label: "Pacote completo — 20 folhas",
+        description:
+          "Bonecas com cabelos, vestidos, sapatos e acessórios em todos os temas de cores.",
         pages: 20,
         url: dollsBundle.url,
         filename: "paper-dolls-complete-bundle.pdf",
       },
       {
-        label: "Bonus: Rumi Set",
-        description: "7 extra sheets with a full outfit collection.",
+        label: "Bônus: conjunto Rumi",
+        description: "7 folhas extras com uma coleção completa de roupas.",
         pages: 7,
         url: dollsRumi.url,
         filename: "paper-dolls-rumi.pdf",
       },
       {
-        label: "Bonus: Extra Doll Set",
-        description: "6 more sheets of dolls and wardrobe pieces.",
+        label: "Bônus: conjunto extra de bonecas",
+        description: "6 folhas extras de bonecas e peças de guarda-roupa.",
         pages: 6,
         url: dollsExtra.url,
         filename: "paper-dolls-extra-set.pdf",
       },
       {
-        label: "Bonus: Dark Skin · Brown Hair Set",
-        description: "8 sheets so every kid finds a doll that looks like her.",
+        label: "Bônus: pele escura · cabelos castanhos",
+        description: "8 folhas para que toda criança encontre uma boneca parecida com ela.",
         pages: 8,
         url: dollsDark.url,
         filename: "paper-dolls-dark-skin-brown-hair.pdf",
       },
       {
-        label: "Bonus: Paper Phone Craft",
-        description: "5 sheets to build a cute paper phone for the dolls.",
+        label: "Bônus: celular de papel",
+        description: "5 folhas para montar um celular de papel fofo para as bonecas.",
         pages: 5,
         url: dollsPhone.url,
         filename: "paper-dolls-iphone-craft.pdf",
       },
     ],
     print: [
-      "White cardstock 180–250 gsm keeps the dolls sturdy.",
-      "A4 or US Letter at 100% scale — turn OFF “Fit to page”.",
-      "Print in color, high quality mode for soft pastel tones.",
-      "Cut around the outlines with a grown-up — small scissors help.",
-      "Do NOT laminate the dolls: tabs need to bend to hold outfits.",
+      "Cartolina branca de 180–250 g/m² mantém as bonecas firmes.",
+      "A4 ou Carta em escala de 100% — desative “Ajustar à página”.",
+      "Imprima colorido, usando o modo de alta qualidade para tons pastel suaves.",
+      "Recorte os contornos com um adulto — tesouras pequenas ajudam.",
+      "Não plastifique as bonecas: as abas precisam dobrar para segurar as roupas.",
     ],
     play: [
-      "Print the doll sheets first, then the outfit sheets.",
-      "Cut each doll and fold the little base tab so she stands up.",
-      "Cut the dresses keeping the white tabs — they fold over the shoulders.",
-      "Mix hair, dresses, shoes and accessories to create new looks.",
-      "Build the dollhouse pages and set up rooms for playtime.",
-      "Store everything in an envelope or zip bag between plays.",
+      "Imprima primeiro as folhas das bonecas e depois as folhas das roupas.",
+      "Recorte cada boneca e dobre a pequena aba da base para que ela fique em pé.",
+      "Recorte os vestidos mantendo as abas brancas — elas dobram sobre os ombros.",
+      "Combine cabelos, vestidos, sapatos e acessórios para criar novos visuais.",
+      "Monte as páginas da casa de bonecas e organize os cômodos para brincar.",
+      "Guarde tudo em um envelope ou saco com fecho entre as brincadeiras.",
     ],
     hasScoreboard: false,
   },
 ];
 
-export function getProduct(id: string): Product | undefined {
+export function getProduto(id: string): Produto | undefined {
   return PRODUCTS.find((p) => p.id === id);
 }
 
@@ -212,6 +213,6 @@ export function downloadUrl(url: string, filename: string) {
   a.remove();
 }
 
-export function downloadProduct(product: Product) {
+export function downloadProduto(product: Produto) {
   downloadUrl(product.url, product.filename);
 }

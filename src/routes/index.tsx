@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { PRODUCTS, downloadProduct, type Product } from "@/lib/decks";
+import { PRODUCTS, downloadProduto, type Produto } from "@/lib/decks";
 import { getProfile } from "@/lib/store";
 import { BottomNav } from "@/components/BottomNav";
 import { InstallButton } from "@/components/InstallButton";
@@ -9,21 +9,20 @@ import { PdfViewer } from "@/components/PdfViewer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Math UNO — Printable Math Card Game for Kids" },
+      { title: "UNO Matemático — Jogo de cartas matemático imprimível para crianças" },
       {
         name: "description",
         content:
-          "Math UNO: your printable math card game. Download the Complete Deck (192 cards) and the exclusive FIFA World Cup 2026 edition. View, print, cut, and play!",
+          "UNO Matemático: seu jogo de cartas matemático para imprimir. Baixe o Baralho completo (192 cartas) e a edição exclusiva FIFA Copa do Mundo 2026. Veja, imprima, recorte e jogue!",
       },
     ],
   }),
   component: Index,
 });
 
-
 function Index() {
   const [name, setName] = useState<string | null>(null);
-  const [viewing, setViewing] = useState<Product | null>(null);
+  const [viewing, setViewing] = useState<Produto | null>(null);
 
   useEffect(() => {
     const p = getProfile();
@@ -39,31 +38,32 @@ function Index() {
       {/* HERO */}
       <section className="shadow-pop mb-6 overflow-hidden rounded-3xl border-4 border-border bg-gradient-to-br from-fun-red via-fun-yellow to-fun-green p-6 text-center animate-pop-in">
         <p className="font-display text-base font-extrabold uppercase tracking-widest text-primary-foreground/90">
-          UNO Method
+          Método UNO
         </p>
         <h1 className="mt-1 font-display text-4xl font-extrabold leading-tight text-primary-foreground drop-shadow-md">
-          Welcome to UNO Method
+          Bem-vindo ao Método UNO
         </h1>
         <p className="mt-3 font-display text-xl font-extrabold text-primary-foreground/95">
-          New stuff every week 🎁
+          Novidades toda semana 🎁
         </p>
         {name && (
           <p className="mt-3 font-display text-lg font-bold text-primary-foreground">
-            Hi, {name}! 👋 Ready to play?
+            Olá, {name}! 👋 Pronto para jogar?
           </p>
         )}
       </section>
 
       {/* PRODUCTS */}
       <section className="mb-6 space-y-5">
-        <h2 className="text-center font-display text-3xl font-extrabold">Your Math UNO Decks</h2>
+        <h2 className="text-center font-display text-3xl font-extrabold">
+          Seus baralhos de UNO Matemático
+        </h2>
         <div className="flex flex-col items-center">
           <p className="rounded-full border-4 border-border bg-fun-yellow px-4 py-2 text-center font-display text-base font-extrabold text-foreground">
-            👇 Download your decks right here
+            👇 Baixe seus baralhos aqui
           </p>
           <span className="animate-bounce-soft text-4xl leading-none">⬇️</span>
         </div>
-
 
         {PRODUCTS.map((product, i) => (
           <article
@@ -71,7 +71,9 @@ function Index() {
             className="shadow-pop overflow-hidden rounded-3xl border-4 border-border bg-card animate-float-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className={`p-3 ${product.id === "fifa" ? "bg-gradient-to-br from-fun-blue via-fun-purple to-fun-red" : "bg-gradient-to-br from-fun-red via-fun-yellow to-fun-green"}`}>
+            <div
+              className={`p-3 ${product.id === "fifa" ? "bg-gradient-to-br from-fun-blue via-fun-purple to-fun-red" : "bg-gradient-to-br from-fun-red via-fun-yellow to-fun-green"}`}
+            >
               <div className="grid grid-cols-2 gap-2 rounded-2xl bg-card/95 p-2">
                 <img
                   src={product.cover}
@@ -81,7 +83,7 @@ function Index() {
                 />
                 <img
                   src={product.sample}
-                  alt={`${product.name} sample cards`}
+                  alt={`${product.name} sample cartas`}
                   loading="lazy"
                   className="aspect-[3/4] w-full rounded-xl object-cover shadow-md"
                 />
@@ -90,13 +92,13 @@ function Index() {
             <div className="p-5">
               {product.id === "fifa" && (
                 <span className="mb-2 inline-block rounded-full bg-fun-yellow px-3 py-1 font-display text-xs font-extrabold uppercase tracking-wider text-foreground">
-                  ⭐ Special Edition
+                  ⭐ Edição especial
                 </span>
               )}
               <h3 className="font-display text-2xl font-extrabold leading-tight">{product.name}</h3>
               <p className="mt-1 text-base font-bold text-muted-foreground">{product.operations}</p>
               <p className="mt-1 text-sm font-bold text-muted-foreground">
-                {product.cards} cards · Ages 4+ · Print-ready PDF
+                {product.cartas} cartas · Idades 4+ · PDF pronto para imprimir
               </p>
 
               <div className="mt-4 grid grid-cols-2 gap-3">
@@ -104,13 +106,13 @@ function Index() {
                   onClick={() => setViewing(product)}
                   className="btn-bounce rounded-2xl border-4 border-border bg-fun-blue px-4 py-4 font-display text-lg font-extrabold text-primary-foreground"
                 >
-                  👀 View
+                  👀 Ver
                 </button>
                 <button
-                  onClick={() => downloadProduct(product)}
+                  onClick={() => downloadProduto(product)}
                   className="btn-bounce rounded-2xl border-4 border-border bg-fun-green px-4 py-4 font-display text-lg font-extrabold text-primary-foreground"
                 >
-                  ⬇️ Download
+                  ⬇️ Baixar
                 </button>
               </div>
             </div>
@@ -120,30 +122,33 @@ function Index() {
 
       {/* INSTRUCTIONS LIVE IN YOUR PURCHASES */}
       <section className="shadow-pop mb-8 rounded-3xl border-4 border-border bg-fun-yellow/40 p-5 text-center">
-        <h2 className="font-display text-2xl font-extrabold">🖨️ Printing & rules</h2>
+        <h2 className="font-display text-2xl font-extrabold">🖨️ Impressão e regras</h2>
         <p className="mt-2 text-base font-bold text-foreground">
-          Every product has its own PDFs, print guide, rules and live scoreboard inside Your Purchases.
+          Cada produto tem seus próprios PDFs, guia de impressão, regras e placar dentro de Minhas
+          compras.
         </p>
         <a
           href="/purchases"
           className="btn-bounce mt-4 inline-block rounded-2xl border-4 border-border bg-card px-6 py-3 font-display text-lg font-extrabold"
         >
-          🎁 Open Your Purchases
+          🎁 Abrir minhas compras
         </a>
       </section>
 
-
       {/* DIGITAL PLAY (companion, not replacement) */}
       <section className="shadow-pop mb-8 rounded-3xl border-4 border-border bg-fun-blue p-6 text-center">
-        <h2 className="font-display text-2xl font-extrabold text-primary-foreground">Practice on your device</h2>
+        <h2 className="font-display text-2xl font-extrabold text-primary-foreground">
+          Pratique no seu dispositivo
+        </h2>
         <p className="mt-2 text-base font-bold text-primary-foreground/95">
-          Bonus mini-games to warm up your math skills between rounds — a fun companion to your printed deck.
+          Minijogos bônus para aquecer suas habilidades matemáticas entre as rodadas — um
+          complemento divertido para o seu baralho impresso.
         </p>
         <a
           href="/play"
           className="btn-bounce mt-4 inline-block rounded-2xl bg-card px-6 py-3 font-display text-lg font-extrabold text-fun-blue"
         >
-          🎮 Open mini-games
+          🎮 Abrir minijogos
         </a>
       </section>
 
