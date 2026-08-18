@@ -17,9 +17,24 @@ import {
 type Phase = "intro" | "banner" | "play" | "done";
 
 const ACTS = [
-  { title: "Forest Gate", emoji: "🌳", bg: "from-emerald-300 to-emerald-500", tip: "Drag an equation onto its answer bucket!" },
-  { title: "Crystal Cave", emoji: "💎", bg: "from-sky-300 to-indigo-400", tip: "Nice! The crystals glow when you're right." },
-  { title: "Castle Gate", emoji: "🏰", bg: "from-fuchsia-300 to-purple-500", tip: "Final gate — free the treasure!" },
+  {
+    title: "Forest Gate",
+    emoji: "🌳",
+    bg: "from-emerald-300 to-emerald-500",
+    tip: "Drag an equation onto its answer bucket!",
+  },
+  {
+    title: "Crystal Cave",
+    emoji: "💎",
+    bg: "from-sky-300 to-indigo-400",
+    tip: "Nice! The crystals glow when you're right.",
+  },
+  {
+    title: "Castle Gate",
+    emoji: "🏰",
+    bg: "from-fuchsia-300 to-purple-500",
+    tip: "Final gate — free the treasure!",
+  },
 ];
 
 const PER_ACT = 4;
@@ -87,7 +102,12 @@ export function DragDropMatch({ onExit }: { level?: 1 | 2 | 3; onExit: () => voi
       const el = bucketRefs.current[i];
       if (!el) continue;
       const r = el.getBoundingClientRect();
-      if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+      if (
+        e.clientX >= r.left &&
+        e.clientX <= r.right &&
+        e.clientY >= r.top &&
+        e.clientY <= r.bottom
+      ) {
         hitIndex = i;
         break;
       }
@@ -169,7 +189,9 @@ export function DragDropMatch({ onExit }: { level?: 1 | 2 | 3; onExit: () => voi
         <span className="font-display text-lg font-extrabold">
           {stage.emoji} {done}/{items.length}
         </span>
-        <span className="font-display text-sm font-bold text-muted-foreground">Total matched: {correct}/{totalPairs}</span>
+        <span className="font-display text-sm font-bold text-muted-foreground">
+          Total matched: {correct}/{totalPairs}
+        </span>
       </div>
       <div className="mb-2">
         <ArcProgress value={act * PER_ACT + done} max={totalPairs} color="bg-fun-purple" />
@@ -181,7 +203,9 @@ export function DragDropMatch({ onExit }: { level?: 1 | 2 | 3; onExit: () => voi
         className={`shadow-pop relative overflow-hidden rounded-3xl border-4 border-border bg-gradient-to-b ${stage.bg} p-3 select-none ${shakeClass}`}
         style={{ minHeight: 460, touchAction: "none" }}
       >
-        <p className="text-center font-display text-base font-extrabold text-white drop-shadow">🪣 Answer buckets</p>
+        <p className="text-center font-display text-base font-extrabold text-white drop-shadow">
+          🪣 Answer buckets
+        </p>
         <div className="mt-2 grid grid-cols-4 gap-2">
           {answers.map((a, i) => (
             <div
@@ -237,7 +261,12 @@ export function DragDropMatch({ onExit }: { level?: 1 | 2 | 3; onExit: () => voi
             );
           })()}
         {phase === "banner" && (
-          <StageBanner act={act + 1} title={stage.title} emoji={stage.emoji} onDone={() => setPhase("play")} />
+          <StageBanner
+            act={act + 1}
+            title={stage.title}
+            emoji={stage.emoji}
+            onDone={() => setPhase("play")}
+          />
         )}
       </div>
       <p className="mt-2 text-center text-sm font-bold text-muted-foreground">
@@ -256,7 +285,11 @@ function build(op: Operation): Item[] {
     const q = easyQuestion(op);
     if (seen.has(q.answer)) continue;
     seen.add(q.answer);
-    items.push({ id: `${q.prompt}-${items.length}-${Math.random().toString(36).slice(2, 6)}`, q, matched: false });
+    items.push({
+      id: `${q.prompt}-${items.length}-${Math.random().toString(36).slice(2, 6)}`,
+      q,
+      matched: false,
+    });
   }
   return items;
 }

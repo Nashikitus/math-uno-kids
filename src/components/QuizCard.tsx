@@ -30,14 +30,22 @@ export function QuizCard({ question, index, total, playerLabel, onAnswer }: Prop
   return (
     <div key={question.prompt} className="animate-pop-in">
       {playerLabel && (
-        <p className="mb-2 text-center font-display text-lg font-bold text-fun-purple">{playerLabel}'s turn!</p>
+        <p className="mb-2 text-center font-display text-lg font-bold text-fun-purple">
+          {playerLabel}'s turn!
+        </p>
       )}
       <p className="mb-3 text-center font-display text-sm font-bold text-muted-foreground">
         Question {index + 1} of {total}
       </p>
-      <div className={`shadow-pop mx-auto mb-6 flex aspect-[4/3] max-w-xs flex-col items-center justify-center rounded-3xl bg-${meta.color} p-6`}>
-        <span className="font-display text-lg font-bold text-primary-foreground/80">{meta.label}</span>
-        <span className="font-display text-6xl font-bold text-primary-foreground">{question.prompt}</span>
+      <div
+        className={`shadow-pop mx-auto mb-6 flex aspect-[4/3] max-w-xs flex-col items-center justify-center rounded-3xl bg-${meta.color} p-6`}
+      >
+        <span className="font-display text-lg font-bold text-primary-foreground/80">
+          {meta.label}
+        </span>
+        <span className="font-display text-6xl font-bold text-primary-foreground">
+          {question.prompt}
+        </span>
         <span className="mt-2 font-display text-3xl font-bold text-primary-foreground">= ?</span>
       </div>
       <div className="grid grid-cols-2 gap-3">

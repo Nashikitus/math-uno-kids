@@ -6,7 +6,9 @@ export function ProfileRedirectFallback() {
       <span className="text-6xl" aria-hidden>
         🦊
       </span>
-      <h1 className="mt-4 font-display text-3xl font-extrabold text-primary">Set up a kid profile</h1>
+      <h1 className="mt-4 font-display text-3xl font-extrabold text-primary">
+        Set up a kid profile
+      </h1>
       <p className="mt-2 text-base font-bold text-muted-foreground">
         Create a kid profile in the Parents tab so the game can save progress.
       </p>

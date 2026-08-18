@@ -2,26 +2,45 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import mascot from "@/assets/mascot.png";
-import { saveProfile, applyTheme, themeForGender, getProfile, type Profile, type Gender } from "@/lib/store";
+import {
+  saveProfile,
+  applyTheme,
+  themeForGender,
+  getProfile,
+  type Profile,
+  type Gender,
+} from "@/lib/store";
 import { playWin } from "@/lib/sounds";
 import { InstallButton } from "@/components/InstallButton";
 import { useInstallPrompt } from "@/hooks/use-install-prompt";
 
-
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Welcome — Kids Math Uno" },
-      { name: "description", content: "Set up your child's profile: pick a hero, name, level and favorite theme." },
+      { title: "Welcome — UNO Matemático Kids" },
+      {
+        name: "description",
+        content: "Set up your child's profile: pick a hero, name, level and favorite theme.",
+      },
     ],
   }),
   component: Onboarding,
 });
 
 const LEVELS = [
-  { value: 1 as const, label: "Little Explorer", desc: "Ages 5-6 · numbers up to 10", emoji: "🐣" },
-  { value: 2 as const, label: "Junior Master", desc: "Ages 7-8 · numbers up to 20", emoji: "🦊" },
-  { value: 3 as const, label: "Math Hero", desc: "Ages 9-10 · big numbers!", emoji: "🦸" },
+  {
+    value: 1 as const,
+    label: "Pequeno explorador",
+    desc: "5–6 anos · números até 10",
+    emoji: "🐣",
+  },
+  { value: 2 as const, label: "Mestre mirim", desc: "7–8 anos · números até 20", emoji: "🦊" },
+  {
+    value: 3 as const,
+    label: "Herói da matemática",
+    desc: "9–10 anos · números grandes!",
+    emoji: "🦸",
+  },
 ];
 
 const TOPICS = [
@@ -63,7 +82,7 @@ function Onboarding() {
     if (!gender) return;
     const theme = themeForGender(gender);
     const profile: Profile = {
-      name: name.trim() || (gender === "boy" ? "Hero" : "Star"),
+      name: name.trim() || (gender === "boy" ? "Herói" : "Estrela"),
       gender,
       level,
       topic,
@@ -75,7 +94,6 @@ function Onboarding() {
     void confetti({ particleCount: 140, spread: 90, origin: { y: 0.6 } });
     setStep(5);
   };
-
 
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col px-6 py-8">
@@ -90,31 +108,40 @@ function Onboarding() {
 
       {step === 0 && (
         <div className="flex flex-1 flex-col items-center justify-center text-center animate-pop-in">
-          <img src={mascot} alt="Friendly fox mascot" width={768} height={768} className="mb-6 h-48 w-48 animate-bounce-soft" />
+          <img
+            src={mascot}
+            alt="Friendly fox mascot"
+            width={768}
+            height={768}
+            className="mb-6 h-48 w-48 animate-bounce-soft"
+          />
           <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-fun-green px-4 py-2 font-display text-sm font-extrabold text-primary-foreground shadow-pop">
-            🎉 Congratulations on your purchase!
+            🎉 Parabéns pela sua compra!
           </span>
-          <h1 className="font-display text-4xl font-extrabold text-primary">Welcome to Kids Math Uno!</h1>
+          <h1 className="font-display text-4xl font-extrabold text-primary">
+            Bem-vindo ao UNO Matemático Kids!
+          </h1>
           <p className="mt-3 text-lg font-bold text-muted-foreground">
-            You're in the right place — this is your official Math UNO app.
+            You're in the right place — this is your official UNO Matemático app.
           </p>
           <p className="mt-2 text-base font-bold text-muted-foreground">
-            Print & play card decks, fun quizzes and a math adventure road just for you!
+            Imprima e jogue com seus baralhos, responda a quizzes divertidos e percorra uma aventura
+            matemática feita para você!
           </p>
           <button
             onClick={() => setStep(1)}
             className="btn-bounce shadow-pop mt-8 w-full rounded-3xl bg-primary px-6 py-5 font-display text-xl font-extrabold text-primary-foreground"
           >
-            Let's Go! 🚀
+            Vamos lá! 🚀
           </button>
         </div>
       )}
 
       {step === 1 && (
         <div className="flex flex-1 flex-col justify-center animate-pop-in">
-          <h1 className="text-center font-display text-3xl font-extrabold">Are you a...</h1>
+          <h1 className="text-center font-display text-3xl font-extrabold">Você é...</h1>
           <p className="mt-1 text-center text-base font-bold text-muted-foreground">
-            We'll pick colors made just for you!
+            Vamos escolher cores feitas para você!
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4">
             <button
@@ -124,7 +151,7 @@ function Onboarding() {
               }`}
             >
               <span className="text-6xl">👦</span>
-              <span className="mt-3 block font-display text-2xl font-extrabold">Boy</span>
+              <span className="mt-3 block font-display text-2xl font-extrabold">Menino</span>
               <span className="mt-2 flex justify-center gap-1">
                 <span className="h-4 w-4 rounded-full bg-fun-blue" />
                 <span className="h-4 w-4 rounded-full bg-fun-green" />
@@ -138,7 +165,7 @@ function Onboarding() {
               }`}
             >
               <span className="text-6xl">👧</span>
-              <span className="mt-3 block font-display text-2xl font-extrabold">Girl</span>
+              <span className="mt-3 block font-display text-2xl font-extrabold">Menina</span>
               <span className="mt-2 flex justify-center gap-1">
                 <span className="h-4 w-4 rounded-full bg-fun-pink" />
                 <span className="h-4 w-4 rounded-full bg-fun-purple" />
@@ -151,11 +178,11 @@ function Onboarding() {
 
       {step === 2 && (
         <div className="flex flex-1 flex-col justify-center animate-pop-in">
-          <h1 className="text-center font-display text-3xl font-extrabold">What's your name?</h1>
+          <h1 className="text-center font-display text-3xl font-extrabold">Qual é o seu nome?</h1>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Type your name..."
+            placeholder="Digite seu nome..."
             maxLength={30}
             className="shadow-pop mt-6 w-full rounded-3xl border-4 border-border bg-card px-6 py-5 text-center font-display text-2xl font-extrabold outline-none focus:border-primary"
           />
@@ -164,14 +191,14 @@ function Onboarding() {
             disabled={!name.trim()}
             className="btn-bounce shadow-pop mt-8 w-full rounded-3xl bg-primary px-6 py-5 font-display text-xl font-extrabold text-primary-foreground disabled:opacity-40"
           >
-            Next ➡️
+            Próximo ➡️
           </button>
         </div>
       )}
 
       {step === 3 && (
         <div className="flex flex-1 flex-col justify-center animate-pop-in">
-          <h1 className="text-center font-display text-3xl font-extrabold">Pick your level!</h1>
+          <h1 className="text-center font-display text-3xl font-extrabold">Escolha seu nível!</h1>
           <div className="mt-6 space-y-3">
             {LEVELS.map((l) => (
               <button
@@ -193,16 +220,16 @@ function Onboarding() {
             onClick={() => setStep(4)}
             className="btn-bounce shadow-pop mt-8 w-full rounded-3xl bg-primary px-6 py-5 font-display text-xl font-extrabold text-primary-foreground"
           >
-            Next ➡️
+            Próximo ➡️
           </button>
         </div>
       )}
 
       {step === 4 && (
         <div className="flex flex-1 flex-col justify-center animate-pop-in">
-          <h1 className="text-center font-display text-3xl font-extrabold">What do you love?</h1>
+          <h1 className="text-center font-display text-3xl font-extrabold">Do que você gosta?</h1>
           <p className="mt-1 text-center text-base font-bold text-muted-foreground">
-            We'll make math stories about it!
+            Vamos criar histórias de matemática sobre isso!
           </p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             {TOPICS.map((t) => (
@@ -214,7 +241,9 @@ function Onboarding() {
                 }`}
               >
                 <span className="block text-4xl">{t.emoji}</span>
-                <span className="mt-1 block font-display text-lg font-extrabold capitalize">{t.value}</span>
+                <span className="mt-1 block font-display text-lg font-extrabold capitalize">
+                  {t.value}
+                </span>
               </button>
             ))}
           </div>
@@ -222,7 +251,7 @@ function Onboarding() {
             onClick={finish}
             className="btn-bounce shadow-pop mt-8 w-full rounded-3xl bg-fun-green px-6 py-5 font-display text-xl font-extrabold text-primary-foreground"
           >
-            All Done! 🎉
+            Tudo pronto! 🎉
           </button>
         </div>
       )}
@@ -230,11 +259,11 @@ function Onboarding() {
       {step === 5 && (
         <div className="flex flex-1 flex-col justify-center text-center animate-pop-in">
           <span className="text-6xl">📲</span>
-          <h1 className="mt-3 font-display text-3xl font-extrabold">Install the App!</h1>
+          <h1 className="mt-3 font-display text-3xl font-extrabold">Instale o aplicativo!</h1>
           <p className="mt-2 text-base font-bold text-muted-foreground">
             {canInstall
-              ? "Tap below to add Kids Math Uno to your phone — play anytime, even offline!"
-              : "You can install this app from your browser menu — look for 'Add to Home Screen'."}
+              ? "Tap below to add UNO Matemático Kids to your phone — play anytime, even offline!"
+              : "Você pode instalar este aplicativo no menu do navegador — procure por “Adicionar à tela inicial”."}
           </p>
           <div className="mt-6">
             <InstallButton />
@@ -243,11 +272,10 @@ function Onboarding() {
             onClick={() => void navigate({ to: "/" })}
             className="btn-bounce shadow-pop mt-4 w-full rounded-3xl bg-primary px-6 py-5 font-display text-xl font-extrabold text-primary-foreground"
           >
-            {canInstall ? "Maybe later — Enter app →" : "Enter app →"}
+            {canInstall ? "Talvez depois — Entrar no app →" : "Entrar no app →"}
           </button>
         </div>
       )}
     </div>
   );
-
 }

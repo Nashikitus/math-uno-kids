@@ -4,7 +4,7 @@ const TABS = [
   { to: "/", emoji: "🏠", label: "Home" },
   { to: "/play", emoji: "🎮", label: "Play" },
   { to: "/purchases", emoji: "🎁", label: "Your\nPurchases" },
-  { to: "/progress", emoji: "⭐", label: "Progress" },
+  { to: "/progress", emoji: "⭐", label: "Progresso" },
   { to: "/parents", emoji: "📊", label: "Parents &\nTeachers" },
 ] as const;
 

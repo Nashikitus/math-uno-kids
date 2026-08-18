@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import type { Product } from "@/lib/decks";
-import { downloadProduct } from "@/lib/decks";
+import type { Produto } from "@/lib/decks";
+import { downloadProduto } from "@/lib/decks";
 
 interface Props {
-  product: Product;
+  product: Produto;
   onClose: () => void;
 }
 
@@ -62,7 +62,7 @@ export function PdfViewer({ product, onClose }: Props) {
         // Use page 1 to estimate the placeholder height for every page.
         const first = await doc.getPage(1);
         if (cancelled) return;
-        const base = first.getViewport({ scale: 1 });
+        const base = first.getVerport({ scale: 1 });
         const ratio = base.height / base.width;
 
         host.innerHTML = "";
@@ -74,7 +74,7 @@ export function PdfViewer({ product, onClose }: Props) {
           const page = n === 1 ? first : await doc.getPage(n);
           if (cancelled) return;
           const scale = (cssWidth / base.width) * dpr;
-          const viewport = page.getViewport({ scale });
+          const viewport = page.getVerport({ scale });
           canvas.width = Math.floor(viewport.width);
           canvas.height = Math.floor(viewport.height);
           const ctx = canvas.getContext("2d");
@@ -153,7 +153,9 @@ export function PdfViewer({ product, onClose }: Props) {
           ✕
         </button>
         <div className="min-w-0 flex-1">
-          <p className="truncate font-display text-base font-extrabold leading-tight">{product.name}</p>
+          <p className="truncate font-display text-base font-extrabold leading-tight">
+            {product.name}
+          </p>
           <p className="truncate text-xs font-bold text-muted-foreground">
             {pageCount ? `Page ${current} of ${pageCount}` : "Loading preview…"}
           </p>
@@ -168,10 +170,15 @@ export function PdfViewer({ product, onClose }: Props) {
       </div>
 
       {/* Pages */}
-      <div ref={scrollRef} className="min-h-0 flex-1 overflow-auto overscroll-contain bg-muted px-2 py-3">
+      <div
+        ref={scrollRef}
+        className="min-h-0 flex-1 overflow-auto overscroll-contain bg-muted px-2 py-3"
+      >
         {loading && (
           <div className="flex h-40 items-center justify-center">
-            <span className="animate-bounce-soft font-display text-2xl font-extrabold">🃏 Loading cards…</span>
+            <span className="animate-bounce-soft font-display text-2xl font-extrabold">
+              🃏 Loading cartas…
+            </span>
           </div>
         )}
         {failed && (
@@ -204,10 +211,10 @@ export function PdfViewer({ product, onClose }: Props) {
           ↗️ Open
         </a>
         <button
-          onClick={() => downloadProduct(product)}
+          onClick={() => downloadProduto(product)}
           className="btn-bounce flex-[2] rounded-2xl border-4 border-border bg-fun-green px-3 py-3 font-display text-base font-extrabold text-primary-foreground"
         >
-          ⬇️ Download PDF
+          ⬇️ Baixar PDF
         </button>
       </div>
     </div>

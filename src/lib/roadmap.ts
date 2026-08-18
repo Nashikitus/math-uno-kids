@@ -84,7 +84,7 @@ export const PHASES: Phase[] = [
     color: "fun-blue",
     kind: "sequence",
     rounds: 5,
-    desc: "What number comes next?",
+    desc: "Qual é o próximo número?",
   },
   {
     id: 7,
@@ -112,7 +112,7 @@ export const PHASES: Phase[] = [
     color: "fun-orange",
     kind: "memory",
     rounds: 4,
-    desc: "Match equations to answers!",
+    desc: "Combine as equações com as respostas!",
   },
   {
     id: 10,

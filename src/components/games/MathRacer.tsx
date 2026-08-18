@@ -15,14 +15,31 @@ import {
   GameStage,
 } from "./GameShell";
 
-
 const H = 460;
 const GATES_PER_ACT = 4;
 
 const ACTS = [
-  { title: "Sunny Speedway", emoji: "🌻", road: "from-emerald-700 to-emerald-900", speed: 2.0, tip: "Steer into the RIGHT answer!" },
-  { title: "Desert Dash", emoji: "🏜️", road: "from-amber-700 to-amber-900", speed: 2.6, tip: "A little faster now — you got this!" },
-  { title: "Rainbow Finish", emoji: "🌈", road: "from-indigo-700 to-purple-900", speed: 3.0, tip: "Last stretch to the trophy!" },
+  {
+    title: "Sunny Velocidadeway",
+    emoji: "🌻",
+    road: "from-emerald-700 to-emerald-900",
+    speed: 2.0,
+    tip: "Steer into the RIGHT answer!",
+  },
+  {
+    title: "Desert Dash",
+    emoji: "🏜️",
+    road: "from-amber-700 to-amber-900",
+    speed: 2.6,
+    tip: "A little faster now — you got this!",
+  },
+  {
+    title: "Rainbow Finish",
+    emoji: "🌈",
+    road: "from-indigo-700 to-purple-900",
+    speed: 3.0,
+    tip: "Last stretch to the trophy!",
+  },
 ];
 
 interface Gate {
@@ -58,9 +75,15 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
   const laneRef = useRef(lane);
   const actRef = useRef(0);
   const opRef = useRef(op);
-  useEffect(() => { laneRef.current = lane; }, [lane]);
-  useEffect(() => { actRef.current = act; }, [act]);
-  useEffect(() => { opRef.current = op; }, [op]);
+  useEffect(() => {
+    laneRef.current = lane;
+  }, [lane]);
+  useEffect(() => {
+    actRef.current = act;
+  }, [act]);
+  useEffect(() => {
+    opRef.current = op;
+  }, [op]);
 
   const totalGates = ACTS.length * GATES_PER_ACT;
 
@@ -208,7 +231,9 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
     <div className="animate-pop-in">
       <Narrator mascot="🏎️" text={stage.tip} />
       <div className="mb-2 flex items-center justify-between">
-        <span className="font-display text-lg font-extrabold">🏁 {correct}/{totalGates}</span>
+        <span className="font-display text-lg font-extrabold">
+          🏁 {correct}/{totalGates}
+        </span>
         {streak >= 2 && (
           <span className="animate-bounce-soft rounded-full bg-fun-orange px-3 py-1 font-display text-sm font-extrabold text-primary-foreground">
             🔥 {streak} streak
@@ -227,7 +252,6 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
         className={`shadow-pop rounded-3xl border-4 border-border bg-gradient-to-b ${stage.road} ${shakeClass}`}
       >
         <div className="absolute inset-0">
-
           <div className="absolute inset-0 flex">
             {[0, 1, 2].map((l) => (
               <div key={l} className="flex-1 border-x-2 border-dashed border-yellow-300/60" />
@@ -236,7 +260,8 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
           <div
             className="absolute inset-0 opacity-40"
             style={{
-              backgroundImage: "repeating-linear-gradient(to bottom, #fde047 0 20px, transparent 20px 60px)",
+              backgroundImage:
+                "repeating-linear-gradient(to bottom, #fde047 0 20px, transparent 20px 60px)",
               backgroundPositionY: (performance.now() / 8) % 60,
             }}
           />
@@ -262,7 +287,11 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
               left: `${(lane * 100) / 3 + 100 / 6}%`,
               transform: "translateX(-50%)",
               filter:
-                flash === "ok" ? "drop-shadow(0 0 10px #22c55e)" : flash === "no" ? "drop-shadow(0 0 10px #ef4444)" : "none",
+                flash === "ok"
+                  ? "drop-shadow(0 0 10px #22c55e)"
+                  : flash === "no"
+                    ? "drop-shadow(0 0 10px #ef4444)"
+                    : "none",
             }}
           >
             🏎️
@@ -278,11 +307,21 @@ export function MathRacer({ onExit }: { level?: 1 | 2 | 3; onExit: () => void })
           )}
           <div className="absolute inset-0 flex">
             {[0, 1, 2].map((l) => (
-              <button key={l} onPointerDown={() => setLane(l as 0 | 1 | 2)} className="flex-1" aria-label={`Lane ${l + 1}`} />
+              <button
+                key={l}
+                onPointerDown={() => setLane(l as 0 | 1 | 2)}
+                className="flex-1"
+                aria-label={`Lane ${l + 1}`}
+              />
             ))}
           </div>
           {phase === "banner" && (
-            <StageBanner act={act + 1} title={stage.title} emoji={stage.emoji} onDone={() => setPhase("race")} />
+            <StageBanner
+              act={act + 1}
+              title={stage.title}
+              emoji={stage.emoji}
+              onDone={() => setPhase("race")}
+            />
           )}
         </div>
       </GameStage>

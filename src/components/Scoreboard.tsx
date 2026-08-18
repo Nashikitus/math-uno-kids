@@ -17,7 +17,7 @@ export interface BoardState {
 
 const RULE_LIST = [
   { id: "uno", label: "Must shout “UNO!” with 1 card left" },
-  { id: "stacking", label: "Stacking Draw cards allowed" },
+  { id: "stacking", label: "Stacking Draw cartas allowed" },
   { id: "solveAloud", label: "Solve the equation out loud" },
   { id: "timer", label: "10-second turn timer" },
   { id: "noMatchDraw", label: "No match? Draw one card" },
@@ -56,16 +56,27 @@ export function Scoreboard({ deckId, accent }: { deckId: string; accent: string 
 
   const update = (patch: Partial<BoardState>) => setBoard((b) => ({ ...b, ...patch }));
   const setPlayer = (id: string, patch: Partial<Player>) =>
-    setBoard((b) => ({ ...b, players: b.players.map((p) => (p.id === id ? { ...p, ...patch } : p)) }));
+    setBoard((b) => ({
+      ...b,
+      players: b.players.map((p) => (p.id === id ? { ...p, ...patch } : p)),
+    }));
 
   const addPlayer = () =>
     setBoard((b) =>
       b.players.length >= 6
         ? b
-        : { ...b, players: [...b.players, { id: `p${Date.now()}`, name: `Player ${b.players.length + 1}`, score: 0 }] },
+        : {
+            ...b,
+            players: [
+              ...b.players,
+              { id: `p${Date.now()}`, name: `Player ${b.players.length + 1}`, score: 0 },
+            ],
+          },
     );
   const removePlayer = (id: string) =>
-    setBoard((b) => (b.players.length <= 2 ? b : { ...b, players: b.players.filter((p) => p.id !== id) }));
+    setBoard((b) =>
+      b.players.length <= 2 ? b : { ...b, players: b.players.filter((p) => p.id !== id) },
+    );
 
   const bump = (id: string, delta: number) => {
     const p = board.players.find((x) => x.id === id);
@@ -86,7 +97,10 @@ export function Scoreboard({ deckId, accent }: { deckId: string; accent: string 
     setBoard((b) => ({ ...b, round: 1, players: b.players.map((p) => ({ ...p, score: 0 })) }));
 
   const leader = [...board.players].sort((a, b) => b.score - a.score)[0];
-  const progress = Math.min(100, Math.round(((leader?.score ?? 0) / Math.max(1, board.target)) * 100));
+  const progress = Math.min(
+    100,
+    Math.round(((leader?.score ?? 0) / Math.max(1, board.target)) * 100),
+  );
 
   return (
     <div className="rounded-3xl border-4 border-border bg-card p-4">
@@ -94,9 +108,13 @@ export function Scoreboard({ deckId, accent }: { deckId: string; accent: string 
         <h4 className="font-display text-lg font-extrabold">🏆 Scoreboard</h4>
         <div className="flex items-center gap-1 rounded-full bg-muted px-3 py-1 font-display text-sm font-extrabold">
           Round
-          <button onClick={() => update({ round: Math.max(1, board.round - 1) })} className="px-1">−</button>
+          <button onClick={() => update({ round: Math.max(1, board.round - 1) })} className="px-1">
+            −
+          </button>
           <span className="text-foreground">{board.round}</span>
-          <button onClick={nextRound} className="px-1">+</button>
+          <button onClick={nextRound} className="px-1">
+            +
+          </button>
         </div>
       </div>
 
@@ -113,7 +131,10 @@ export function Scoreboard({ deckId, accent }: { deckId: string; accent: string 
           />
         </div>
         <div className="h-3 overflow-hidden rounded-full border-2 border-border bg-muted">
-          <div className={`h-full bg-${accent} transition-all duration-500`} style={{ width: `${progress}%` }} />
+          <div
+            className={`h-full bg-${accent} transition-all duration-500`}
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
@@ -145,7 +166,9 @@ export function Scoreboard({ deckId, accent }: { deckId: string; accent: string 
               <input
                 type="number"
                 value={p.score}
-                onChange={(e) => setPlayer(p.id, { score: Math.max(0, Number(e.target.value) || 0) })}
+                onChange={(e) =>
+                  setPlayer(p.id, { score: Math.max(0, Number(e.target.value) || 0) })
+                }
                 className="w-16 rounded-xl border-2 border-border bg-card px-1 py-1 text-center font-display text-lg font-extrabold"
                 aria-label={`${p.name} score`}
               />

@@ -20,8 +20,11 @@ import { SettingsPanel } from "@/components/SettingsPanel";
 export const Route = createFileRoute("/parents")({
   head: () => ({
     meta: [
-      { title: "Parent Dashboard — KidsMath Cards" },
-      { name: "description", content: "See your child's weekly math accuracy, strengths and areas to practice." },
+      { title: "Painel dos responsáveis — KidsMath Cards" },
+      {
+        name: "description",
+        content: "See your child's weekly math accuracy, strengths and areas to practice.",
+      },
     ],
   }),
   component: Parents,
@@ -62,7 +65,11 @@ function Parents() {
   }, []);
 
   if (!checked) {
-    return <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">
+        Carregando...
+      </div>
+    );
   }
 
   if (!profile || editing) {
@@ -73,12 +80,12 @@ function Parents() {
         </h1>
         <p className="mb-4 text-center text-base font-bold text-muted-foreground">
           {profile
-            ? "Update your child's name, level and favorite theme."
+            ? "Atualize o nome, nível e tema favorito da criança."
             : "Create a profile so the app can save progress and personalize stories."}
         </p>
         <ProfileSetup
           showWelcome={!profile}
-          doneLabel="Back to dashboard →"
+          doneLabel="Voltar para dashboard →"
           onDone={() => {
             setEditing(false);
             refresh();
@@ -90,9 +97,12 @@ function Parents() {
   }
 
   if (!stats) {
-    return <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center font-display text-2xl font-extrabold">
+        Carregando...
+      </div>
+    );
   }
-
 
   // Weekly per-op aggregation
   const weekKeys = lastNDaysKeys(7);
@@ -117,7 +127,8 @@ function Parents() {
   }
 
   const withData = OPERATIONS.filter((op) => weekly[op].total >= 3);
-  const acc = (op: Operation) => Math.round((weekly[op].correct / Math.max(1, weekly[op].total)) * 100);
+  const acc = (op: Operation) =>
+    Math.round((weekly[op].correct / Math.max(1, weekly[op].total)) * 100);
   let insight = `${profile.name} hasn't practiced much this week yet. A quick round a day builds the habit!`;
   if (withData.length > 0) {
     const sorted = [...withData].sort((a, b) => acc(b) - acc(a));
@@ -132,7 +143,9 @@ function Parents() {
 
   return (
     <div className="mx-auto min-h-screen w-full px-4 pb-28 pt-6">
-      <h1 className="mb-2 text-center font-display text-3xl font-extrabold text-primary">Parent Dashboard 📊</h1>
+      <h1 className="mb-2 text-center font-display text-3xl font-extrabold text-primary">
+        Painel dos responsáveis 📊
+      </h1>
       <div className="mb-6 flex items-center justify-center gap-2">
         <span className="rounded-full bg-muted px-3 py-1 text-sm font-bold text-muted-foreground">
           Kid: <span className="font-extrabold text-foreground">{profile.name}</span>
@@ -145,10 +158,11 @@ function Parents() {
         </button>
       </div>
 
-
       {/* Insight */}
       <div className="shadow-pop mb-6 rounded-3xl border-4 border-fun-blue bg-card p-5 animate-pop-in">
-        <p className="font-display text-sm font-extrabold uppercase tracking-wide text-fun-blue">This Week</p>
+        <p className="font-display text-sm font-extrabold uppercase tracking-wide text-fun-blue">
+          This Week
+        </p>
         <p className="mt-1 text-base font-bold leading-relaxed">{insight}</p>
       </div>
 
@@ -205,7 +219,10 @@ function Parents() {
             const s = stats[op];
             const pct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
             return (
-              <div key={op} className="flex items-center justify-between border-b-2 border-border px-5 py-3 last:border-b-0">
+              <div
+                key={op}
+                className="flex items-center justify-between border-b-2 border-border px-5 py-3 last:border-b-0"
+              >
                 <span className="font-display text-base font-extrabold">{OP_META[op].label}</span>
                 <span className="text-sm font-bold text-muted-foreground">
                   {s.total > 0 ? `${pct}% (${s.correct}/${s.total})` : "—"}
@@ -219,7 +236,6 @@ function Parents() {
       <div className="mt-8">
         <SettingsPanel onEditProfile={() => setEditing(true)} />
       </div>
-
 
       <BottomNav />
     </div>

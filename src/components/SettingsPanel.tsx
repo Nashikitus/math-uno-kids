@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { CancelSubscription } from "@/components/CancelSubscription";
 
-type View = "menu" | "support" | "about";
+type Ver = "menu" | "support" | "about";
 
 export function SettingsPanel({ onEditProfile }: { onEditProfile?: () => void }) {
   const [open, setOpen] = useState(false);
-  const [view, setView] = useState<View>("menu");
+  const [view, setVer] = useState<Ver>("menu");
 
   const close = () => {
     setOpen(false);
-    setView("menu");
+    setVer("menu");
   };
 
   if (!open) {
@@ -34,7 +34,7 @@ export function SettingsPanel({ onEditProfile }: { onEditProfile?: () => void })
           {view === "about" && "ℹ️ About"}
         </h2>
         <button
-          onClick={view === "menu" ? close : () => setView("menu")}
+          onClick={view === "menu" ? close : () => setVer("menu")}
           className="rounded-xl border-2 border-border px-3 py-2 font-display text-sm font-extrabold text-muted-foreground"
         >
           {view === "menu" ? "Close" : "← Back"}
@@ -44,25 +44,31 @@ export function SettingsPanel({ onEditProfile }: { onEditProfile?: () => void })
       {view === "menu" && (
         <div className="space-y-3">
           {onEditProfile && (
-            <MenuItem emoji="🦊" label="Kid profile" desc="Name, level and theme" onClick={onEditProfile} />
+            <MenuItem
+              emoji="🦊"
+              label="Kid profile"
+              desc="Name, level and theme"
+              onClick={onEditProfile}
+            />
           )}
           <MenuItem
-
             emoji="💬"
             label="Support"
             desc="Help, contact and cancellation"
-            onClick={() => setView("support")}
+            onClick={() => setVer("support")}
           />
-          <MenuItem emoji="ℹ️" label="About" desc="App version and legal" onClick={() => setView("about")} />
+          <MenuItem
+            emoji="ℹ️"
+            label="About"
+            desc="App version and legal"
+            onClick={() => setVer("about")}
+          />
         </div>
       )}
 
-
-
-
       {view === "about" && (
         <div className="space-y-3 text-base font-bold">
-          <InfoRow label="App" value="UNO Method" />
+          <InfoRow label="App" value="Método UNO" />
           <InfoRow label="Version" value="1.0.0" />
           <InfoRow label="Contact" value="support@unomethod.com" />
         </div>
