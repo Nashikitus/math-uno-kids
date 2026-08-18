@@ -15,8 +15,8 @@ export const Route = createFileRoute("/purchases/$productId")({
     const p = loaderData?.product;
     const title = p ? `${p.name} — Minhas compras` : "Produto — Minhas compras";
     const description = p
-      ? `${p.tagline}. Ver the PDF online, print at home and follow the guia passo a passo.`
-      : "Ver, print and download your Método UNO product.";
+      ? `${p.tagline}. Veja o PDF online, imprima em casa e siga o guia passo a passo.`
+      : "Veja, imprima e baixe seu produto do Método UNO.";
     return {
       meta: [
         { title },
@@ -99,7 +99,7 @@ function ProdutoPage() {
         ))}
       </section>
 
-      <Steps title="🖨️ How to print" items={product.print} defaultOpen />
+      <Steps title="🖨️ Como imprimir" items={product.print} defaultOpen />
       <Steps
         title={product.hasScoreboard ? "🎮 Como jogar" : "✂️ Como recortar e jogar"}
         items={product.play}

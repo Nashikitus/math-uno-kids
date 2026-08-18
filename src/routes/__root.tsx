@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Uno Math Aventuras offers interactive math card games for kids, with printable decks and digital play modes.",
+          "O UNO Matemático oferece jogos interativos de matemática para crianças, baralhos para imprimir e modos digitais de jogo.",
       },
       { name: "author", content: "KidsMath Cards" },
       { name: "theme-color", content: "#F97316" },
@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Uno Math Aventuras offers interactive math card games for kids, with printable decks and digital play modes.",
+          "O UNO Matemático oferece jogos interativos de matemática para crianças, baralhos para imprimir e modos digitais de jogo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -99,30 +99,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Uno Math Aventuras offers interactive math card games for kids, with printable decks and digital play modes.",
+          "O UNO Matemático oferece jogos interativos de matemática para crianças, baralhos para imprimir e modos digitais de jogo.",
       },
-      {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cfbb4fcc-fe4a-4d2a-b119-223efb5f9112/id-preview-be09e186--7c1c59f9-4a55-49b1-8b25-60a73348560a.lovable.app-1783459950787.png",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cfbb4fcc-fe4a-4d2a-b119-223efb5f9112/id-preview-be09e186--7c1c59f9-4a55-49b1-8b25-60a73348560a.lovable.app-1783459950787.png",
-      },
+      { property: "og:image", content: "/icons/icon-512.png" },
+      { name: "twitter:image", content: "/icons/icon-512.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;700;800&display=swap",
-      },
     ],
   }),
   shellComponent: RootShell,

@@ -17,10 +17,10 @@ import { useInstallPrompt } from "@/hooks/use-install-prompt";
 export const Route = createFileRoute("/onboarding")({
   head: () => ({
     meta: [
-      { title: "Welcome — UNO Matemático Kids" },
+      { title: "Boas-vindas — UNO Matemático Kids" },
       {
         name: "description",
-        content: "Set up your child's profile: pick a hero, name, level and favorite theme.",
+        content: "Crie o perfil da criança: escolha um personagem, nome, nível e tema favorito.",
       },
     ],
   }),
@@ -110,7 +110,7 @@ function Onboarding() {
         <div className="flex flex-1 flex-col items-center justify-center text-center animate-pop-in">
           <img
             src={mascot}
-            alt="Friendly fox mascot"
+            alt="Mascote raposa amigável"
             width={768}
             height={768}
             className="mb-6 h-48 w-48 animate-bounce-soft"
@@ -122,7 +122,7 @@ function Onboarding() {
             Bem-vindo ao UNO Matemático Kids!
           </h1>
           <p className="mt-3 text-lg font-bold text-muted-foreground">
-            You're in the right place — this is your official UNO Matemático app.
+            Você está no lugar certo — este é o aplicativo oficial do UNO Matemático.
           </p>
           <p className="mt-2 text-base font-bold text-muted-foreground">
             Imprima e jogue com seus baralhos, responda a quizzes divertidos e percorra uma aventura
@@ -262,7 +262,7 @@ function Onboarding() {
           <h1 className="mt-3 font-display text-3xl font-extrabold">Instale o aplicativo!</h1>
           <p className="mt-2 text-base font-bold text-muted-foreground">
             {canInstall
-              ? "Tap below to add UNO Matemático Kids to your phone — play anytime, even offline!"
+              ? "Toque abaixo para adicionar o UNO Matemático Kids ao celular — jogue quando quiser, até sem internet!"
               : "Você pode instalar este aplicativo no menu do navegador — procure por “Adicionar à tela inicial”."}
           </p>
           <div className="mt-6">

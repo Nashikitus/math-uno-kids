@@ -9,12 +9,12 @@ export const Route = createFileRoute("/purchases/")({
       {
         name: "description",
         content:
-          "All your Método UNO products in one place: UNO Matemático decks, the Copa do Mundo 2026 edition and the Kit de bonecas de papel. Abra um produto para ver, imprimir e baixar.",
+          "Todos os produtos do Método UNO em um só lugar: baralhos UNO Matemático, edição Copa do Mundo 2026 e Kit de bonecas de papel. Abra um produto para ver, imprimir e baixar.",
       },
       { property: "og:title", content: "Minhas compras — Método UNO" },
       {
         property: "og:description",
-        content: "Open each product card to view the PDF, print instructions and downloads.",
+        content: "Abra cada produto para ver o PDF, as instruções de impressão e os downloads.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,7 +34,7 @@ function Purchases() {
           Minhas compras 🎁
         </h1>
         <p className="mt-2 font-display text-base font-bold text-primary-foreground/95">
-          Tap a product to open your PDFs, print guide and rules.
+          Toque em um produto para abrir seus PDFs, guia de impressão e regras.
         </p>
       </header>
 
@@ -69,7 +69,7 @@ function Purchases() {
               <p className="mt-1 text-xs font-bold leading-snug text-muted-foreground">
                 {product.tagline}
               </p>
-              <p className="mt-2 font-display text-sm font-extrabold text-primary">Open ▶</p>
+              <p className="mt-2 font-display text-sm font-extrabold text-primary">Abrir ▶</p>
             </div>
           </Link>
         ))}

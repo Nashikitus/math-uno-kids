@@ -26,7 +26,7 @@ export const Route = createFileRoute("/play")({
       {
         name: "description",
         content:
-          "Jogue games de matemática: Estrada da Matemática, Matemática Flappy, Racer, Archery and Arraste e Solte!",
+          "Jogue minijogos de matemática: Estrada da Matemática, Matemática Flappy, Corrida Matemática, Arco e Flecha Matemático e Arraste e Solte!",
       },
     ],
   }),
@@ -67,7 +67,7 @@ const GAMES: GameCard[] = [
     emoji: "🗺️",
     color: "fun-purple",
     tag: "Aventura",
-    desc: "10 phases · Boss battle",
+    desc: "10 fases · Batalha final",
   },
   {
     id: "flappy",
@@ -175,7 +175,7 @@ function Play() {
           <div className={`shadow-pop mb-4 rounded-3xl bg-${phase.color} p-4 text-center`}>
             <span className="text-3xl">{phase.emoji}</span>
             <h2 className="font-display text-xl font-extrabold text-primary-foreground">
-              Phase {phase.id}: {phase.name}
+              Fase {phase.id}: {phase.name}
             </h2>
             <p className="text-sm font-bold text-primary-foreground/90">{phase.desc}</p>
           </div>
@@ -188,7 +188,7 @@ function Play() {
           <BackBtn onClick={() => setScreen("road")} label="Mapa" />
           <span className="text-7xl">{result.stars > 0 ? "🏆" : "😅"}</span>
           <h2 className="mt-4 font-display text-3xl font-extrabold">
-            {result.stars > 0 ? "Fase concluída!" : "So close! Tentar novamente!"}
+            {result.stars > 0 ? "Fase concluída!" : "Quase lá! Tente novamente!"}
           </h2>
           <div className="mt-4 flex justify-center gap-2">
             {[1, 2, 3].map((s) => (
@@ -201,7 +201,7 @@ function Play() {
             ))}
           </div>
           <p className="mt-3 font-display text-xl font-extrabold text-primary">
-            {result.correct} / {result.total} correct
+            {result.correct} / {result.total} acertos
           </p>
           <div className="mt-8 space-y-3">
             <button
@@ -231,7 +231,7 @@ function Play() {
               to="/progress"
               className="block pt-2 text-center font-display text-sm font-bold text-fun-purple underline"
             >
-              See my progress ⭐
+              Ver meu progresso ⭐
             </Link>
           </div>
         </div>
@@ -312,7 +312,7 @@ function JogosHub({
       <div className="mb-5 text-center">
         <h1 className="font-display text-3xl font-extrabold text-primary">🎮 Jogos</h1>
         <p className="font-display text-sm font-bold text-muted-foreground">
-          Hi {name}! You have {totalEstrelas} ⭐ · Escolha um jogo para jogar!
+          Olá, {name}! Você tem {totalEstrelas} ⭐ · Escolha um jogo para jogar!
         </p>
       </div>
       <div className="grid grid-cols-2 gap-3">
@@ -358,7 +358,7 @@ function RoadmapVer({
           🗺️ Estrada da Matemática
         </h1>
         <p className="font-display text-sm font-bold text-muted-foreground">
-          {profile}, you have {totalEstrelas} ⭐ · Reach the Boss at Phase 10!
+          {profile}, você tem {totalEstrelas} ⭐ · Chegue à batalha final na fase 10!
         </p>
       </div>
 
@@ -390,7 +390,7 @@ function RoadmapVer({
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="font-display text-xs font-extrabold uppercase opacity-80">
-                        Phase {p.id}
+                        Fase {p.id}
                       </p>
                       <p className="font-display text-lg font-extrabold leading-tight">{p.name}</p>
                       <p className="text-xs font-bold opacity-90">{p.desc}</p>

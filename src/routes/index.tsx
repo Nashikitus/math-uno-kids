@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "UNO Matemático: your printable math card game. Baixar the Baralho completo (192 cartas) and the exclusive FIFA Copa do Mundo 2026 edition. Ver, print, cut, and play!",
+          "UNO Matemático: seu jogo de cartas matemático para imprimir. Baixe o Baralho completo (192 cartas) e a edição exclusiva FIFA Copa do Mundo 2026. Veja, imprima, recorte e jogue!",
       },
     ],
   }),
@@ -41,7 +41,7 @@ function Index() {
           Método UNO
         </p>
         <h1 className="mt-1 font-display text-4xl font-extrabold leading-tight text-primary-foreground drop-shadow-md">
-          Welcome to Método UNO
+          Bem-vindo ao Método UNO
         </h1>
         <p className="mt-3 font-display text-xl font-extrabold text-primary-foreground/95">
           Novidades toda semana 🎁
@@ -124,7 +124,7 @@ function Index() {
       <section className="shadow-pop mb-8 rounded-3xl border-4 border-border bg-fun-yellow/40 p-5 text-center">
         <h2 className="font-display text-2xl font-extrabold">🖨️ Impressão e regras</h2>
         <p className="mt-2 text-base font-bold text-foreground">
-          Every product has its own PDFs, print guide, rules and live scoreboard inside Minhas
+          Cada produto tem seus próprios PDFs, guia de impressão, regras e placar dentro de Minhas
           compras.
         </p>
         <a
@@ -141,8 +141,8 @@ function Index() {
           Pratique no seu dispositivo
         </h2>
         <p className="mt-2 text-base font-bold text-primary-foreground/95">
-          Bonus mini-games to warm up your math skills between rounds — a fun companion to your
-          printed deck.
+          Minijogos bônus para aquecer suas habilidades matemáticas entre as rodadas — um
+          complemento divertido para o seu baralho impresso.
         </p>
         <a
           href="/play"

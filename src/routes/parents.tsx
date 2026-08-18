@@ -23,7 +23,8 @@ export const Route = createFileRoute("/parents")({
       { title: "Painel dos responsáveis — KidsMath Cards" },
       {
         name: "description",
-        content: "See your child's weekly math accuracy, strengths and areas to practice.",
+        content:
+          "Veja a precisão semanal em matemática, os pontos fortes e as áreas para praticar.",
       },
     ],
   }),
@@ -76,12 +77,12 @@ function Parents() {
     return (
       <div className="mx-auto min-h-screen w-full px-4 pb-28 pt-6">
         <h1 className="mb-4 text-center font-display text-3xl font-extrabold text-primary">
-          {profile ? "Edit Profile ✏️" : "Set Up Kid Profile 🦊"}
+          {profile ? "Editar perfil ✏️" : "Criar perfil da criança 🦊"}
         </h1>
         <p className="mb-4 text-center text-base font-bold text-muted-foreground">
           {profile
             ? "Atualize o nome, nível e tema favorito da criança."
-            : "Create a profile so the app can save progress and personalize stories."}
+            : "Crie um perfil para salvar o progresso e personalizar as histórias."}
         </p>
         <ProfileSetup
           showWelcome={!profile}
@@ -129,15 +130,15 @@ function Parents() {
   const withData = OPERATIONS.filter((op) => weekly[op].total >= 3);
   const acc = (op: Operation) =>
     Math.round((weekly[op].correct / Math.max(1, weekly[op].total)) * 100);
-  let insight = `${profile.name} hasn't practiced much this week yet. A quick round a day builds the habit!`;
+  let insight = `${profile.name} ainda não praticou muito nesta semana. Uma rodada rápida por dia ajuda a criar o hábito!`;
   if (withData.length > 0) {
     const sorted = [...withData].sort((a, b) => acc(b) - acc(a));
     const best = sorted[0];
     const worst = sorted[sorted.length - 1];
     if (best === worst) {
-      insight = `${profile.name} got ${acc(best)}% right in ${OP_META[best].label.toLowerCase()} this week. Try mixing in another operation!`;
+      insight = `${profile.name} acertou ${acc(best)}% em ${OP_META[best].label.toLowerCase()} nesta semana. Tente incluir outra operação!`;
     } else {
-      insight = `${profile.name} got ${acc(best)}% right in ${OP_META[best].label.toLowerCase()} this week, but could use more practice with ${OP_META[worst].label.toLowerCase()} (${acc(worst)}%).`;
+      insight = `${profile.name} acertou ${acc(best)}% em ${OP_META[best].label.toLowerCase()} nesta semana, mas pode praticar mais ${OP_META[worst].label.toLowerCase()} (${acc(worst)}%).`;
     }
   }
 
@@ -148,20 +149,20 @@ function Parents() {
       </h1>
       <div className="mb-6 flex items-center justify-center gap-2">
         <span className="rounded-full bg-muted px-3 py-1 text-sm font-bold text-muted-foreground">
-          Kid: <span className="font-extrabold text-foreground">{profile.name}</span>
+          Criança: <span className="font-extrabold text-foreground">{profile.name}</span>
         </span>
         <button
           onClick={() => setEditing(true)}
           className="btn-bounce rounded-full bg-primary/10 px-3 py-1 text-sm font-extrabold text-primary"
         >
-          ✏️ Edit profile
+          ✏️ Editar perfil
         </button>
       </div>
 
       {/* Insight */}
       <div className="shadow-pop mb-6 rounded-3xl border-4 border-fun-blue bg-card p-5 animate-pop-in">
         <p className="font-display text-sm font-extrabold uppercase tracking-wide text-fun-blue">
-          This Week
+          Esta semana
         </p>
         <p className="mt-1 text-base font-bold leading-relaxed">{insight}</p>
       </div>
@@ -170,21 +171,21 @@ function Parents() {
       <div className="mb-6 grid grid-cols-3 gap-3">
         <div className="shadow-pop rounded-3xl border-4 border-border bg-card p-4 text-center">
           <p className="font-display text-2xl font-extrabold">{weekTotal}</p>
-          <p className="text-xs font-bold text-muted-foreground">Answers this week</p>
+          <p className="text-xs font-bold text-muted-foreground">Respostas nesta semana</p>
         </div>
         <div className="shadow-pop rounded-3xl border-4 border-border bg-card p-4 text-center">
           <p className="font-display text-2xl font-extrabold">{streak} 🔥</p>
-          <p className="text-xs font-bold text-muted-foreground">Day streak</p>
+          <p className="text-xs font-bold text-muted-foreground">Dias seguidos</p>
         </div>
         <div className="shadow-pop rounded-3xl border-4 border-border bg-card p-4 text-center">
           <p className="font-display text-2xl font-extrabold">{badgeCount} 🏅</p>
-          <p className="text-xs font-bold text-muted-foreground">Badges earned</p>
+          <p className="text-xs font-bold text-muted-foreground">Medalhas conquistadas</p>
         </div>
       </div>
 
       {/* Weekly accuracy by operation */}
       <section className="mb-8">
-        <h2 className="mb-4 font-display text-xl font-extrabold">Weekly Accuracy</h2>
+        <h2 className="mb-4 font-display text-xl font-extrabold">Precisão semanal</h2>
         <div className="space-y-3">
           {OPERATIONS.map((op) => {
             const w = weekly[op];
@@ -196,7 +197,7 @@ function Parents() {
                     {OP_META[op].symbol} {OP_META[op].label}
                   </span>
                   <span className="text-sm font-bold text-muted-foreground">
-                    {w.total > 0 ? `${pct}% · ${w.correct}/${w.total}` : "No practice yet"}
+                    {w.total > 0 ? `${pct}% · ${w.correct}/${w.total}` : "Ainda sem prática"}
                   </span>
                 </div>
                 <div className="h-4 overflow-hidden rounded-full bg-muted">
@@ -213,7 +214,7 @@ function Parents() {
 
       {/* All-time */}
       <section>
-        <h2 className="mb-4 font-display text-xl font-extrabold">All Time</h2>
+        <h2 className="mb-4 font-display text-xl font-extrabold">Todo o período</h2>
         <div className="shadow-pop overflow-hidden rounded-3xl border-4 border-border bg-card">
           {OPERATIONS.map((op) => {
             const s = stats[op];
