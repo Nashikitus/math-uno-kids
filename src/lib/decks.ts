@@ -1,10 +1,3 @@
-import completeAsset from "@/assets/math-uno-complete.pdf.asset.json";
-import fifaAsset from "@/assets/math-uno-fifa-2026-v3.pdf.asset.json";
-import dollsBundle from "@/assets/paper-dolls-complete-bundle.pdf.asset.json";
-import dollsRumi from "@/assets/paper-dolls-rumi.pdf.asset.json";
-import dollsExtra from "@/assets/paper-dolls-extra-set.pdf.asset.json";
-import dollsDark from "@/assets/paper-dolls-dark-skin-brown-hair.pdf.asset.json";
-import dollsPhone from "@/assets/paper-dolls-iphone-craft.pdf.asset.json";
 import cardMathUno from "@/assets/card-math-uno.jpg";
 import cardFifa from "@/assets/card-fifa.jpg";
 import cardPaperBonecas from "@/assets/card-paper-dolls.jpg";
@@ -52,7 +45,7 @@ export const PRODUCTS: Produto[] = [
     gradient: "from-fun-red via-fun-yellow to-fun-green",
     cartas: 192,
     operations: "Adição · Subtração · Multiplicação · Divisão",
-    url: completeAsset.url,
+    url: "/pdfs/math-uno-complete-deck.pdf",
     filename: "math-uno-complete-deck.pdf",
     card: cardMathUno,
     cover: cardMathUno,
@@ -63,7 +56,7 @@ export const PRODUCTS: Produto[] = [
         description:
           "As quatro operações, versos das cartas e modelo de caixa para guardar o baralho.",
         pages: 96,
-        url: completeAsset.url,
+        url: "/pdfs/math-uno-complete-deck.pdf",
         filename: "math-uno-complete-deck.pdf",
       },
     ],
@@ -95,7 +88,7 @@ export const PRODUCTS: Produto[] = [
     gradient: "from-fun-blue via-fun-purple to-fun-red",
     cartas: 96,
     operations: "Adição + Subtração · Tema Copa do Mundo 2026",
-    url: fifaAsset.url,
+    url: "/pdfs/math-uno-fifa-world-cup-2026.pdf",
     filename: "math-uno-fifa-world-cup-2026.pdf",
     card: cardFifa,
     cover: cardFifa,
@@ -106,7 +99,7 @@ export const PRODUCTS: Produto[] = [
         description:
           "Cartas de adição e subtração, cartas coringa de times e modelo de caixa temático.",
         pages: 48,
-        url: fifaAsset.url,
+        url: "/pdfs/math-uno-fifa-world-cup-2026.pdf",
         filename: "math-uno-fifa-world-cup-2026.pdf",
       },
     ],
@@ -138,7 +131,7 @@ export const PRODUCTS: Produto[] = [
     gradient: "from-fun-pink via-fun-purple to-fun-red",
     cartas: 250,
     operations: "Bonecas · Roupas · Acessórios · Casa de bonecas",
-    url: dollsBundle.url,
+    url: "/pdfs/paper-dolls-complete-bundle.pdf",
     filename: "paper-dolls-complete-bundle.pdf",
     card: cardPaperBonecas,
     cover: cardPaperBonecas,
@@ -149,35 +142,35 @@ export const PRODUCTS: Produto[] = [
         description:
           "Bonecas com cabelos, vestidos, sapatos e acessórios em todos os temas de cores.",
         pages: 20,
-        url: dollsBundle.url,
+        url: "/pdfs/paper-dolls-complete-bundle.pdf",
         filename: "paper-dolls-complete-bundle.pdf",
       },
       {
         label: "Bônus: conjunto Rumi",
         description: "7 folhas extras com uma coleção completa de roupas.",
         pages: 7,
-        url: dollsRumi.url,
+        url: "/pdfs/paper-dolls-rumi.pdf",
         filename: "paper-dolls-rumi.pdf",
       },
       {
         label: "Bônus: conjunto extra de bonecas",
         description: "6 folhas extras de bonecas e peças de guarda-roupa.",
         pages: 6,
-        url: dollsExtra.url,
+        url: "/pdfs/paper-dolls-extra-set.pdf",
         filename: "paper-dolls-extra-set.pdf",
       },
       {
         label: "Bônus: pele escura · cabelos castanhos",
         description: "8 folhas para que toda criança encontre uma boneca parecida com ela.",
         pages: 8,
-        url: dollsDark.url,
+        url: "/pdfs/paper-dolls-dark-skin-brown-hair.pdf",
         filename: "paper-dolls-dark-skin-brown-hair.pdf",
       },
       {
         label: "Bônus: celular de papel",
         description: "5 folhas para montar um celular de papel fofo para as bonecas.",
         pages: 5,
-        url: dollsPhone.url,
+        url: "/pdfs/paper-dolls-iphone-craft.pdf",
         filename: "paper-dolls-iphone-craft.pdf",
       },
     ],
