@@ -56,7 +56,7 @@ export default function Page() {
     <main className="page-shell">
       <div className="video-page">
         <section className="player-section" aria-label="Player do vídeo"><VturbPlayer /></section>
-        <div className="utmify-container">
+        <div className="utmify1">
           <button type="button" className="utmify" onClick={startCheckout}>QUERO ACESSAR - O CHECK IN REVERSO</button>
           <p>Acesso imediato • R$37 • 7 dias de garantia.</p>
         </div>
