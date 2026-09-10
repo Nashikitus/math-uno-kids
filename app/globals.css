@@ -9,9 +9,9 @@ button, a { font: inherit; } button { border: 0; cursor: pointer; }
 .player-section .vturb-host { min-height: 281px; background: #000; }
 .player-section vturb-smartplayer { display: block !important; width: 100%; max-width: 400px; min-height: 281px; margin: 0 auto; background: #000; }
 .player-section .vturb-player-placeholder { display: block !important; min-height: 281px; background: #000 !important; }
-.utmify { display: none; width: calc(100% - 36px); margin: 18px 18px 0; color: #111; background: transparent; text-align: center; }
-.utmify button { display: block; width: 100%; padding: 17px 24px; color: #111; background: #f5c542; border: 0; border-radius: 999px; font-size: 18px; font-weight: 800; line-height: 1.3; box-shadow: 0 0 0 0 rgba(245, 197, 66, .7); animation: utmify-pulse 1.8s infinite; cursor: pointer; }
-.utmify p { margin: 8px 0 0; color: #aaa; font-size: 12px; line-height: 1.4; }
+.utmify-container { display: none; width: calc(100% - 36px); margin: 18px 18px 0; color: #111; background: transparent; text-align: center; }
+.utmify { display: block; width: 100%; padding: 17px 24px; color: #111; background: #f5c542; border: 0; border-radius: 999px; font-size: 18px; font-weight: 800; line-height: 1.3; box-shadow: 0 0 0 0 rgba(245, 197, 66, .7); animation: utmify-pulse 1.8s infinite; cursor: pointer; }
+.utmify-container p { margin: 8px 0 0; color: #aaa; font-size: 12px; line-height: 1.4; }
 @keyframes utmify-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(245, 197, 66, .65); } 50% { box-shadow: 0 0 0 10px rgba(245, 197, 66, 0); } }
 .video-info { padding: 15px 18px 12px; background: #0f0f0f; }
 h1 { margin: 0 0 8px; color: #f1f1f1; font-size: 19px; font-weight: 700; line-height: 1.22; letter-spacing: -0.2px; }
@@ -56,7 +56,7 @@ footer { padding: 26px 0 29px; color: #777; background: #161616; text-align: cen
   .channel-row { gap: 14px; padding-bottom: 18px; }
   .channel-avatar { width: 46px; height: 46px; font-size: 21px; }
   .subscribe { padding: 11px 18px; border-radius: 20px; font-size: 14px; }
-  .utmify button { padding: 18px 22px; font-size: 19px; }
+  .utmify { padding: 18px 22px; font-size: 19px; }
   .action-row { gap: 20px; padding-bottom: 6px; }
   .action-pill, .more-button { padding: 11px 14px; border-radius: 21px; font-size: 14px; }
   .action-icon { width: 23px; height: 23px; }
